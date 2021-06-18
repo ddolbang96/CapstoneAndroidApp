@@ -34,7 +34,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
         btn_register.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
@@ -44,7 +43,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
         btn_login.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View view) {
                 String userID = et_id.getText().toString();
@@ -59,11 +57,11 @@ public class LoginActivity extends AppCompatActivity {
                             if(success){
                                 String userID = jsonObject.getString("userID");
                                 String userPass = jsonObject.getString("userPassword");
-
                                 Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                intent.putExtra("userID", userID);
-                                intent.putExtra("userPass", userPass);
+                                //Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, DetectorActivity.class);
+                                //intent.putExtra("userID", userID);
+                                //intent.putExtra("userPass", userPass);
                                 startActivity(intent);
                             }else{
                                 Toast.makeText(getApplicationContext(), "Login Fail", Toast.LENGTH_SHORT).show();
