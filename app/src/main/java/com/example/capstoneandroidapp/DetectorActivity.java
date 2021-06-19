@@ -296,9 +296,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     }
 
     InputImage image = InputImage.fromBitmap(croppedBitmap, 0);
-    faceDetector
-            .process(image)
-            .addOnSuccessListener(new OnSuccessListener<List<Face>>() {
+    faceDetector.process(image).addOnSuccessListener(new OnSuccessListener<List<Face>>() {
               @Override
               public void onSuccess(List<Face> faces) {
                 if (faces.size() == 0) {
@@ -314,7 +312,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                           }
                         });
               }
-
             });
 
 
@@ -450,6 +447,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
   }
 
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+
   private void onFacesDetected(long currTimestamp, List<Face> faces, boolean add) {
 
     cropCopyBitmap = Bitmap.createBitmap(croppedBitmap);
@@ -468,7 +468,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     final List<SimilarityClassifier.Recognition> mappedRecognitions =
             new LinkedList<SimilarityClassifier.Recognition>();
-
 
     //final List<Classifier.Recognition> results = new ArrayList<>();
 
@@ -493,7 +492,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     boolean saved = false;
 
     for (Face face : faces) {
-
       LOGGER.i("FACE" + face.toString());
       LOGGER.i("Running detection on face " + currTimestamp);
       //results = detector.recognizeImage(croppedBitmap);
@@ -551,6 +549,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 //            LOGGER.i("embeeding retrieved " + extra.toString());
 //          }
 
+          // getting name from DB
           float conf = result.getDistance();
           if (conf < 1.0f) {
 
@@ -592,18 +591,15 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         mappedRecognitions.add(result);
 
       }
-
-
     }
-
     //    if (saved) {
 //      lastSaved = System.currentTimeMillis();
 //    }
-
     updateResults(currTimestamp, mappedRecognitions);
-
-
   }
+
+
+
 
 
 }
