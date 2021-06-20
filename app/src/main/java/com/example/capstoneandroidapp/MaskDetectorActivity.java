@@ -37,7 +37,9 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -135,9 +137,18 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
   private String dialogMessage = "";
   private AlertDialog alertDialog;
 
+  private ProgressBar progressBar;
+  private int progressValuePhaseOneMaskOn = 0;
+  private int progressValuePhaseOneMaskOff = 0;
+  private int progressValuePhaseThreeMaskOn = 0;
+  private int progressValuePhaseThreeMaskOff = 0;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    progressBar = (ProgressBar)findViewById(R.id.progressBar);
+    progressBar.setProgress(0);
 
     Intent intent = getIntent();
     phase = intent.getIntExtra("phase", 1);
@@ -508,8 +519,11 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
                         start = System.currentTimeMillis();
                         term = 0;
                         dialogFlag = 1;
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MaskDetectorActivity.this);
-                        dialogMessage = "마스크를 벗어주세요.";
+                        progressValuePhaseOneMaskOn = 0;
+                        progressBar.setProgress(progressValuePhaseOneMaskOn);
+                        ContextThemeWrapper cw = new ContextThemeWrapper(MaskDetectorActivity.this, R.style.AlertDialogTheme);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(cw);
+                        dialogMessage = "마스크를 벗고 카메라 앞에 서 주세요.";
                         builder.setTitle("공지").setMessage(dialogMessage + "\n\n" + (int)((5000 - term)/1000));
                         builder.setPositiveButton("확인", new DialogInterface.OnClickListener(){
                           @Override
@@ -530,6 +544,9 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
                     }
                     else{
                       countPhaseOneMaskOn = countPhaseOneMaskOn + 1;
+                      progressValuePhaseOneMaskOff = 0;
+                      progressValuePhaseOneMaskOn = progressValuePhaseOneMaskOn + 20;
+                      progressBar.setProgress(progressValuePhaseOneMaskOn);
                       countPhaseOneMaskOff = 0;
                       //Log.v("test", "->" + countPhaseOneMaskOn);
                     }
@@ -549,8 +566,11 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
                         start = System.currentTimeMillis();
                         term = 0;
                         dialogFlag = 1;
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MaskDetectorActivity.this);
-                        dialogMessage = "환영합니다!";
+                        progressValuePhaseThreeMaskOn = 0;
+                        progressBar.setProgress(progressValuePhaseThreeMaskOn);
+                        ContextThemeWrapper cw = new ContextThemeWrapper(MaskDetectorActivity.this, R.style.AlertDialogTheme);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(cw);
+                        dialogMessage = "OOO님,\n환영합니다!";
                         builder.setTitle("공지").setMessage(dialogMessage + "\n\n" + (int)((5000 - term)/1000));
                         builder.setPositiveButton("확인", new DialogInterface.OnClickListener(){
                           @Override
@@ -571,6 +591,9 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
                     }
                     else{
                       countPhaseThreeMaskOn = countPhaseThreeMaskOn + 1;
+                      progressValuePhaseThreeMaskOff = 0;
+                      progressValuePhaseThreeMaskOn = progressValuePhaseThreeMaskOn + 20;
+                      progressBar.setProgress(progressValuePhaseThreeMaskOn);
                       countPhaseThreeMaskOff = 0;
                     }
                     /*
@@ -594,6 +617,8 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
                         countPhaseOneMaskOff = 0;
                         countPhaseThreeMaskOn = 0;
                         countPhaseThreeMaskOff = 0;
+                        progressValuePhaseOneMaskOff = 0;
+                        progressBar.setProgress(progressValuePhaseOneMaskOff);
                         // DetectorActivity 로 전환 + Phase 값 (=2) 넘기기 -> MaskDetectorActivity 닫기
                         Intent intent5 = new Intent(MaskDetectorActivity.this, DetectorActivity.class);
                         phase = 2;
@@ -604,6 +629,9 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
                       }
                       else{
                         countPhaseOneMaskOff = countPhaseOneMaskOff + 1;
+                        progressValuePhaseOneMaskOn = 0;
+                        progressValuePhaseOneMaskOff = progressValuePhaseOneMaskOff + 20;
+                        progressBar.setProgress(progressValuePhaseOneMaskOff);
                         countPhaseOneMaskOn = 0;
                       }
 
@@ -614,8 +642,11 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
                           start = System.currentTimeMillis();
                           term = 0;
                           dialogFlag = 1;
-                          AlertDialog.Builder builder = new AlertDialog.Builder(MaskDetectorActivity.this);
-                          dialogMessage = "마스크를 다시 써주세요.";
+                          progressValuePhaseThreeMaskOff = 0;
+                          progressBar.setProgress(progressValuePhaseThreeMaskOff);
+                          ContextThemeWrapper cw = new ContextThemeWrapper(MaskDetectorActivity.this, R.style.AlertDialogTheme);
+                          AlertDialog.Builder builder = new AlertDialog.Builder(cw);
+                          dialogMessage = "OOO님,\n마스크를 다시 써주세요!";
                           builder.setTitle("공지").setMessage(dialogMessage + "\n\n" + (int)((5000 - term)/1000));
                           builder.setPositiveButton("확인", new DialogInterface.OnClickListener(){
                             @Override
@@ -636,6 +667,9 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
                       }
                       else{
                         countPhaseThreeMaskOff = countPhaseThreeMaskOff + 1;
+                        progressValuePhaseThreeMaskOn = 0;
+                        progressValuePhaseThreeMaskOff = progressValuePhaseThreeMaskOff + 20;
+                        progressBar.setProgress(progressValuePhaseThreeMaskOff);
                         countPhaseThreeMaskOn = 0;
                       }
                       /*

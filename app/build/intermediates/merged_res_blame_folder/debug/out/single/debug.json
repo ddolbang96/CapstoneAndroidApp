@@ -48,6 +48,10 @@
         "source": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\src\\main\\res\\layout\\image_edit_dialog.xml"
     },
     {
+        "merged": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable_doge.png.flat",
+        "source": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\src\\main\\res\\drawable\\doge.png"
+    },
+    {
         "merged": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
     },

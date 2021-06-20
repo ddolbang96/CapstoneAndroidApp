@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -30,15 +31,20 @@ public final class MaskTfeOdActivityCameraBinding implements ViewBinding {
   public final FloatingActionButton fab;
 
   @NonNull
+  public final ProgressBar progressBar;
+
+  @NonNull
   public final Toolbar toolbar;
 
   private MaskTfeOdActivityCameraBinding(@NonNull CoordinatorLayout rootView,
       @NonNull TfeOdLayoutBottomSheetBinding bottomSheetLayout, @NonNull FrameLayout container,
-      @NonNull FloatingActionButton fab, @NonNull Toolbar toolbar) {
+      @NonNull FloatingActionButton fab, @NonNull ProgressBar progressBar,
+      @NonNull Toolbar toolbar) {
     this.rootView = rootView;
     this.bottomSheetLayout = bottomSheetLayout;
     this.container = container;
     this.fab = fab;
+    this.progressBar = progressBar;
     this.toolbar = toolbar;
   }
 
@@ -88,6 +94,12 @@ public final class MaskTfeOdActivityCameraBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.progressBar;
+      ProgressBar progressBar = rootView.findViewById(id);
+      if (progressBar == null) {
+        break missingId;
+      }
+
       id = R.id.toolbar;
       Toolbar toolbar = rootView.findViewById(id);
       if (toolbar == null) {
@@ -95,7 +107,7 @@ public final class MaskTfeOdActivityCameraBinding implements ViewBinding {
       }
 
       return new MaskTfeOdActivityCameraBinding((CoordinatorLayout) rootView,
-          binding_bottomSheetLayout, container, fab, toolbar);
+          binding_bottomSheetLayout, container, fab, progressBar, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -1723,6 +1723,7 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable doge
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable ic_baseline_add
@@ -2001,6 +2002,7 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
+id imageView
 id inference
 id inference_info
 id info
@@ -2108,6 +2110,7 @@ id pin
 id plus
 id position
 id postLayout
+id progressBar
 id progress_circular
 id progress_horizontal
 id radio
@@ -2543,6 +2546,7 @@ string tfe_od_camera_error
 string title_activity_popup
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
+style AlertDialogTheme
 style AndroidThemeColorAccentYellow
 style Animation_AppCompat_Dialog
 style Animation_AppCompat_DropDownUp

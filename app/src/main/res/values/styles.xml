@@ -7,4 +7,8 @@
         <item name="colorAccent">@color/tfe_color_accent</item>
     </style>
 
+    <style name="AlertDialogTheme" parent ="android:Theme.Dialog">
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>

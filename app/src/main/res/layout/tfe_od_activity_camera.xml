@@ -21,8 +21,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#00000000">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/black"
@@ -50,6 +49,17 @@
                 android:src="@drawable/tfl2_logo" />
 
         </androidx.appcompat.widget.Toolbar>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="600dp"
+            android:max="99"
+            android:scaleY="5" />
 
     </RelativeLayout>
 

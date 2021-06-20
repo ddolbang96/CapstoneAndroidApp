@@ -47,136 +47,135 @@
 28-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:17:9-54
 29        android:supportsRtl="true"
 29-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:18:9-35
-30        android:testOnly="true"
-31        android:theme="@style/Theme.CapstoneAndroidApp"
-31-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:19:9-56
-32        android:usesCleartextTraffic="true" >
-32-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:20:9-44
-33        <activity android:name="com.example.capstoneandroidapp.LoginActivity" >
-33-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:21:9-27:20
-33-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:21:19-48
-34            <intent-filter>
-34-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:22:13-26:29
-35                <action android:name="android.intent.action.MAIN" />
-35-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:23:17-69
-35-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:23:25-66
-36
-37                <category android:name="android.intent.category.LAUNCHER" />
-37-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:25:17-77
-37-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:25:27-74
-38            </intent-filter>
-39        </activity>
-40        <activity
-40-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:28:9-32:63
-41            android:name="com.example.capstoneandroidapp.DetectorActivity"
-41-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:29:13-45
-42            android:label="@string/tfe_od_app_name"
-42-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:30:13-52
-43            android:screenOrientation="portrait"
-43-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:31:13-49
-44            android:theme="@style/AppTheme.ObjectDetection" />
-44-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:32:13-60
-45        <activity
-45-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:33:9-37:63
-46            android:name="com.example.capstoneandroidapp.MaskDetectorActivity"
-46-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:34:13-49
-47            android:label="@string/tfe_od_app_name"
-47-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:35:13-52
-48            android:screenOrientation="portrait"
-48-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:36:13-49
-49            android:theme="@style/AppTheme.ObjectDetection" />
-49-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:37:13-60
-50        <activity android:name="com.example.capstoneandroidapp.RegisterActivity" />
-50-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:38:9-54
-50-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:38:19-51
-51        <activity android:name="com.example.capstoneandroidapp.MainActivity" />
-51-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:39:9-50
-51-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:39:19-47
-52
-53        <service
-53-->[com.google.android.gms:play-services-mlkit-face-detection:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\19b29dec360eda9751b13a6a2099f6d3\play-services-mlkit-face-detection-16.0.0\AndroidManifest.xml:9:9-15:19
-54            android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService"
-54-->[com.google.android.gms:play-services-mlkit-face-detection:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\19b29dec360eda9751b13a6a2099f6d3\play-services-mlkit-face-detection-16.0.0\AndroidManifest.xml:10:13-91
-55            android:directBootAware="true"
-55-->[com.google.mlkit:common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\6ef61db5cb6808cbe7e0ff98af03ee11\common-16.0.0\AndroidManifest.xml:17:13-43
-56            android:exported="false" >
-56-->[com.google.android.gms:play-services-mlkit-face-detection:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\19b29dec360eda9751b13a6a2099f6d3\play-services-mlkit-face-detection-16.0.0\AndroidManifest.xml:11:13-37
-57            <meta-data
-57-->[com.google.android.gms:play-services-mlkit-face-detection:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\19b29dec360eda9751b13a6a2099f6d3\play-services-mlkit-face-detection-16.0.0\AndroidManifest.xml:12:13-14:85
-58                android:name="com.google.firebase.components:com.google.mlkit.vision.face.internal.FaceRegistrar"
-58-->[com.google.android.gms:play-services-mlkit-face-detection:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\19b29dec360eda9751b13a6a2099f6d3\play-services-mlkit-face-detection-16.0.0\AndroidManifest.xml:13:17-114
-59                android:value="com.google.firebase.components.ComponentRegistrar" />
-59-->[com.google.android.gms:play-services-mlkit-face-detection:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\19b29dec360eda9751b13a6a2099f6d3\play-services-mlkit-face-detection-16.0.0\AndroidManifest.xml:14:17-82
-60            <meta-data
-60-->[com.google.mlkit:vision-common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\9c8fe0c944fea3df5092f26fcc3c74ef\vision-common-16.0.0\AndroidManifest.xml:12:13-14:85
-61                android:name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar"
-61-->[com.google.mlkit:vision-common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\9c8fe0c944fea3df5092f26fcc3c74ef\vision-common-16.0.0\AndroidManifest.xml:13:17-124
-62                android:value="com.google.firebase.components.ComponentRegistrar" />
-62-->[com.google.mlkit:vision-common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\9c8fe0c944fea3df5092f26fcc3c74ef\vision-common-16.0.0\AndroidManifest.xml:14:17-82
-63            <meta-data
-63-->[com.google.mlkit:common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\6ef61db5cb6808cbe7e0ff98af03ee11\common-16.0.0\AndroidManifest.xml:20:13-22:85
-64                android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar"
-64-->[com.google.mlkit:common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\6ef61db5cb6808cbe7e0ff98af03ee11\common-16.0.0\AndroidManifest.xml:21:17-120
-65                android:value="com.google.firebase.components.ComponentRegistrar" />
-65-->[com.google.mlkit:common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\6ef61db5cb6808cbe7e0ff98af03ee11\common-16.0.0\AndroidManifest.xml:22:17-82
-66        </service>
-67
-68        <provider
-68-->[com.google.mlkit:common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\6ef61db5cb6808cbe7e0ff98af03ee11\common-16.0.0\AndroidManifest.xml:9:9-13:38
-69            android:name="com.google.mlkit.common.internal.MlKitInitProvider"
-69-->[com.google.mlkit:common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\6ef61db5cb6808cbe7e0ff98af03ee11\common-16.0.0\AndroidManifest.xml:10:13-78
-70            android:authorities="com.example.capstoneandroidapp.mlkitinitprovider"
-70-->[com.google.mlkit:common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\6ef61db5cb6808cbe7e0ff98af03ee11\common-16.0.0\AndroidManifest.xml:11:13-69
-71            android:exported="false"
-71-->[com.google.mlkit:common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\6ef61db5cb6808cbe7e0ff98af03ee11\common-16.0.0\AndroidManifest.xml:12:13-37
-72            android:initOrder="99" />
-72-->[com.google.mlkit:common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\6ef61db5cb6808cbe7e0ff98af03ee11\common-16.0.0\AndroidManifest.xml:13:13-35
-73
-74        <activity
-74-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\5d8bee59a82526eeea78e2d510654d9f\play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
-75            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-75-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\5d8bee59a82526eeea78e2d510654d9f\play-services-base-17.0.0\AndroidManifest.xml:24:13-79
-76            android:exported="false"
-76-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\5d8bee59a82526eeea78e2d510654d9f\play-services-base-17.0.0\AndroidManifest.xml:25:13-37
-77            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-77-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\5d8bee59a82526eeea78e2d510654d9f\play-services-base-17.0.0\AndroidManifest.xml:26:13-72
-78
-79        <meta-data
-79-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\a4564273a0f10cadd31b356ef6b80ba0\play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
-80            android:name="com.google.android.gms.version"
-80-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\a4564273a0f10cadd31b356ef6b80ba0\play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
-81            android:value="@integer/google_play_services_version" />
-81-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\a4564273a0f10cadd31b356ef6b80ba0\play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
-82
-83        <service
-83-->[com.google.android.datatransport:transport-backend-cct:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\f19b0af7b1e51b3696f991bc21902f92\transport-backend-cct-2.2.2\AndroidManifest.xml:29:9-35:19
-84            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
-84-->[com.google.android.datatransport:transport-backend-cct:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\f19b0af7b1e51b3696f991bc21902f92\transport-backend-cct-2.2.2\AndroidManifest.xml:30:13-103
-85            android:exported="false" >
-85-->[com.google.android.datatransport:transport-backend-cct:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\f19b0af7b1e51b3696f991bc21902f92\transport-backend-cct-2.2.2\AndroidManifest.xml:31:13-37
-86            <meta-data
-86-->[com.google.android.datatransport:transport-backend-cct:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\f19b0af7b1e51b3696f991bc21902f92\transport-backend-cct-2.2.2\AndroidManifest.xml:32:13-34:39
-87                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
-87-->[com.google.android.datatransport:transport-backend-cct:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\f19b0af7b1e51b3696f991bc21902f92\transport-backend-cct-2.2.2\AndroidManifest.xml:33:17-94
-88                android:value="cct" />
-88-->[com.google.android.datatransport:transport-backend-cct:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\f19b0af7b1e51b3696f991bc21902f92\transport-backend-cct-2.2.2\AndroidManifest.xml:34:17-36
-89        </service>
-90        <service
-90-->[com.google.android.datatransport:transport-runtime:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\046244e198f9ff279484f74855bf0fce\transport-runtime-2.2.2\AndroidManifest.xml:26:9-30:19
-91            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
-91-->[com.google.android.datatransport:transport-runtime:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\046244e198f9ff279484f74855bf0fce\transport-runtime-2.2.2\AndroidManifest.xml:27:13-117
-92            android:exported="false"
-92-->[com.google.android.datatransport:transport-runtime:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\046244e198f9ff279484f74855bf0fce\transport-runtime-2.2.2\AndroidManifest.xml:28:13-37
-93            android:permission="android.permission.BIND_JOB_SERVICE" >
-93-->[com.google.android.datatransport:transport-runtime:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\046244e198f9ff279484f74855bf0fce\transport-runtime-2.2.2\AndroidManifest.xml:29:13-69
-94        </service>
-95
-96        <receiver
-96-->[com.google.android.datatransport:transport-runtime:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\046244e198f9ff279484f74855bf0fce\transport-runtime-2.2.2\AndroidManifest.xml:32:9-34:40
-97            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
-97-->[com.google.android.datatransport:transport-runtime:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\046244e198f9ff279484f74855bf0fce\transport-runtime-2.2.2\AndroidManifest.xml:33:13-132
-98            android:exported="false" />
-98-->[com.google.android.datatransport:transport-runtime:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\046244e198f9ff279484f74855bf0fce\transport-runtime-2.2.2\AndroidManifest.xml:34:13-37
-99    </application>
-100
-101</manifest>
+30        android:theme="@style/Theme.CapstoneAndroidApp"
+30-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:19:9-56
+31        android:usesCleartextTraffic="true" >
+31-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:20:9-44
+32        <activity android:name="com.example.capstoneandroidapp.LoginActivity" >
+32-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:21:9-27:20
+32-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:21:19-48
+33            <intent-filter>
+33-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:22:13-26:29
+34                <action android:name="android.intent.action.MAIN" />
+34-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:23:17-69
+34-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:23:25-66
+35
+36                <category android:name="android.intent.category.LAUNCHER" />
+36-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:25:17-77
+36-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:25:27-74
+37            </intent-filter>
+38        </activity>
+39        <activity
+39-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:28:9-32:63
+40            android:name="com.example.capstoneandroidapp.DetectorActivity"
+40-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:29:13-45
+41            android:label="@string/tfe_od_app_name"
+41-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:30:13-52
+42            android:screenOrientation="portrait"
+42-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:31:13-49
+43            android:theme="@style/AppTheme.ObjectDetection" />
+43-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:32:13-60
+44        <activity
+44-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:33:9-37:63
+45            android:name="com.example.capstoneandroidapp.MaskDetectorActivity"
+45-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:34:13-49
+46            android:label="@string/tfe_od_app_name"
+46-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:35:13-52
+47            android:screenOrientation="portrait"
+47-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:36:13-49
+48            android:theme="@style/AppTheme.ObjectDetection" />
+48-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:37:13-60
+49        <activity android:name="com.example.capstoneandroidapp.RegisterActivity" />
+49-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:38:9-54
+49-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:38:19-51
+50        <activity android:name="com.example.capstoneandroidapp.MainActivity" />
+50-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:39:9-50
+50-->C:\Users\User\StudioProjects\CapstoneAndroidApp\app\src\main\AndroidManifest.xml:39:19-47
+51
+52        <service
+52-->[com.google.android.gms:play-services-mlkit-face-detection:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\19b29dec360eda9751b13a6a2099f6d3\play-services-mlkit-face-detection-16.0.0\AndroidManifest.xml:9:9-15:19
+53            android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService"
+53-->[com.google.android.gms:play-services-mlkit-face-detection:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\19b29dec360eda9751b13a6a2099f6d3\play-services-mlkit-face-detection-16.0.0\AndroidManifest.xml:10:13-91
+54            android:directBootAware="true"
+54-->[com.google.mlkit:common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\6ef61db5cb6808cbe7e0ff98af03ee11\common-16.0.0\AndroidManifest.xml:17:13-43
+55            android:exported="false" >
+55-->[com.google.android.gms:play-services-mlkit-face-detection:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\19b29dec360eda9751b13a6a2099f6d3\play-services-mlkit-face-detection-16.0.0\AndroidManifest.xml:11:13-37
+56            <meta-data
+56-->[com.google.android.gms:play-services-mlkit-face-detection:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\19b29dec360eda9751b13a6a2099f6d3\play-services-mlkit-face-detection-16.0.0\AndroidManifest.xml:12:13-14:85
+57                android:name="com.google.firebase.components:com.google.mlkit.vision.face.internal.FaceRegistrar"
+57-->[com.google.android.gms:play-services-mlkit-face-detection:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\19b29dec360eda9751b13a6a2099f6d3\play-services-mlkit-face-detection-16.0.0\AndroidManifest.xml:13:17-114
+58                android:value="com.google.firebase.components.ComponentRegistrar" />
+58-->[com.google.android.gms:play-services-mlkit-face-detection:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\19b29dec360eda9751b13a6a2099f6d3\play-services-mlkit-face-detection-16.0.0\AndroidManifest.xml:14:17-82
+59            <meta-data
+59-->[com.google.mlkit:vision-common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\9c8fe0c944fea3df5092f26fcc3c74ef\vision-common-16.0.0\AndroidManifest.xml:12:13-14:85
+60                android:name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar"
+60-->[com.google.mlkit:vision-common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\9c8fe0c944fea3df5092f26fcc3c74ef\vision-common-16.0.0\AndroidManifest.xml:13:17-124
+61                android:value="com.google.firebase.components.ComponentRegistrar" />
+61-->[com.google.mlkit:vision-common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\9c8fe0c944fea3df5092f26fcc3c74ef\vision-common-16.0.0\AndroidManifest.xml:14:17-82
+62            <meta-data
+62-->[com.google.mlkit:common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\6ef61db5cb6808cbe7e0ff98af03ee11\common-16.0.0\AndroidManifest.xml:20:13-22:85
+63                android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar"
+63-->[com.google.mlkit:common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\6ef61db5cb6808cbe7e0ff98af03ee11\common-16.0.0\AndroidManifest.xml:21:17-120
+64                android:value="com.google.firebase.components.ComponentRegistrar" />
+64-->[com.google.mlkit:common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\6ef61db5cb6808cbe7e0ff98af03ee11\common-16.0.0\AndroidManifest.xml:22:17-82
+65        </service>
+66
+67        <provider
+67-->[com.google.mlkit:common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\6ef61db5cb6808cbe7e0ff98af03ee11\common-16.0.0\AndroidManifest.xml:9:9-13:38
+68            android:name="com.google.mlkit.common.internal.MlKitInitProvider"
+68-->[com.google.mlkit:common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\6ef61db5cb6808cbe7e0ff98af03ee11\common-16.0.0\AndroidManifest.xml:10:13-78
+69            android:authorities="com.example.capstoneandroidapp.mlkitinitprovider"
+69-->[com.google.mlkit:common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\6ef61db5cb6808cbe7e0ff98af03ee11\common-16.0.0\AndroidManifest.xml:11:13-69
+70            android:exported="false"
+70-->[com.google.mlkit:common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\6ef61db5cb6808cbe7e0ff98af03ee11\common-16.0.0\AndroidManifest.xml:12:13-37
+71            android:initOrder="99" />
+71-->[com.google.mlkit:common:16.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\6ef61db5cb6808cbe7e0ff98af03ee11\common-16.0.0\AndroidManifest.xml:13:13-35
+72
+73        <activity
+73-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\5d8bee59a82526eeea78e2d510654d9f\play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+74            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+74-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\5d8bee59a82526eeea78e2d510654d9f\play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+75            android:exported="false"
+75-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\5d8bee59a82526eeea78e2d510654d9f\play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+76            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+76-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\5d8bee59a82526eeea78e2d510654d9f\play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+77
+78        <meta-data
+78-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\a4564273a0f10cadd31b356ef6b80ba0\play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+79            android:name="com.google.android.gms.version"
+79-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\a4564273a0f10cadd31b356ef6b80ba0\play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+80            android:value="@integer/google_play_services_version" />
+80-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\a4564273a0f10cadd31b356ef6b80ba0\play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+81
+82        <service
+82-->[com.google.android.datatransport:transport-backend-cct:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\f19b0af7b1e51b3696f991bc21902f92\transport-backend-cct-2.2.2\AndroidManifest.xml:29:9-35:19
+83            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+83-->[com.google.android.datatransport:transport-backend-cct:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\f19b0af7b1e51b3696f991bc21902f92\transport-backend-cct-2.2.2\AndroidManifest.xml:30:13-103
+84            android:exported="false" >
+84-->[com.google.android.datatransport:transport-backend-cct:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\f19b0af7b1e51b3696f991bc21902f92\transport-backend-cct-2.2.2\AndroidManifest.xml:31:13-37
+85            <meta-data
+85-->[com.google.android.datatransport:transport-backend-cct:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\f19b0af7b1e51b3696f991bc21902f92\transport-backend-cct-2.2.2\AndroidManifest.xml:32:13-34:39
+86                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+86-->[com.google.android.datatransport:transport-backend-cct:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\f19b0af7b1e51b3696f991bc21902f92\transport-backend-cct-2.2.2\AndroidManifest.xml:33:17-94
+87                android:value="cct" />
+87-->[com.google.android.datatransport:transport-backend-cct:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\f19b0af7b1e51b3696f991bc21902f92\transport-backend-cct-2.2.2\AndroidManifest.xml:34:17-36
+88        </service>
+89        <service
+89-->[com.google.android.datatransport:transport-runtime:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\046244e198f9ff279484f74855bf0fce\transport-runtime-2.2.2\AndroidManifest.xml:26:9-30:19
+90            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+90-->[com.google.android.datatransport:transport-runtime:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\046244e198f9ff279484f74855bf0fce\transport-runtime-2.2.2\AndroidManifest.xml:27:13-117
+91            android:exported="false"
+91-->[com.google.android.datatransport:transport-runtime:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\046244e198f9ff279484f74855bf0fce\transport-runtime-2.2.2\AndroidManifest.xml:28:13-37
+92            android:permission="android.permission.BIND_JOB_SERVICE" >
+92-->[com.google.android.datatransport:transport-runtime:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\046244e198f9ff279484f74855bf0fce\transport-runtime-2.2.2\AndroidManifest.xml:29:13-69
+93        </service>
+94
+95        <receiver
+95-->[com.google.android.datatransport:transport-runtime:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\046244e198f9ff279484f74855bf0fce\transport-runtime-2.2.2\AndroidManifest.xml:32:9-34:40
+96            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+96-->[com.google.android.datatransport:transport-runtime:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\046244e198f9ff279484f74855bf0fce\transport-runtime-2.2.2\AndroidManifest.xml:33:13-132
+97            android:exported="false" />
+97-->[com.google.android.datatransport:transport-runtime:2.2.2] C:\Users\User\.gradle\caches\transforms-2\files-2.1\046244e198f9ff279484f74855bf0fce\transport-runtime-2.2.2\AndroidManifest.xml:34:13-37
+98    </application>
+99
+100</manifest>

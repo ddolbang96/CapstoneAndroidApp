@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center|top"
+        android:background="@drawable/doge"
+        android:scaleX="0.2"
+        android:scaleY="0.6"
+        tools:ignore="MissingConstraints" />
+
+
+
     <EditText
         android:id="@+id/et_id"
         android:layout_width="wrap_content"

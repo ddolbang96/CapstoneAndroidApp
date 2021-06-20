@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -36,18 +37,23 @@ public final class TfeOdActivityCameraBinding implements ViewBinding {
   public final FloatingActionButton fabSwitchcam;
 
   @NonNull
+  public final ProgressBar progressBar;
+
+  @NonNull
   public final Toolbar toolbar;
 
   private TfeOdActivityCameraBinding(@NonNull CoordinatorLayout rootView,
       @NonNull TfeOdLayoutBottomSheetBinding bottomSheetLayout, @NonNull FrameLayout container,
       @NonNull FloatingActionButton fabAdd, @NonNull FloatingActionButton fabSeach,
-      @NonNull FloatingActionButton fabSwitchcam, @NonNull Toolbar toolbar) {
+      @NonNull FloatingActionButton fabSwitchcam, @NonNull ProgressBar progressBar,
+      @NonNull Toolbar toolbar) {
     this.rootView = rootView;
     this.bottomSheetLayout = bottomSheetLayout;
     this.container = container;
     this.fabAdd = fabAdd;
     this.fabSeach = fabSeach;
     this.fabSwitchcam = fabSwitchcam;
+    this.progressBar = progressBar;
     this.toolbar = toolbar;
   }
 
@@ -109,6 +115,12 @@ public final class TfeOdActivityCameraBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.progressBar;
+      ProgressBar progressBar = rootView.findViewById(id);
+      if (progressBar == null) {
+        break missingId;
+      }
+
       id = R.id.toolbar;
       Toolbar toolbar = rootView.findViewById(id);
       if (toolbar == null) {
@@ -116,7 +128,7 @@ public final class TfeOdActivityCameraBinding implements ViewBinding {
       }
 
       return new TfeOdActivityCameraBinding((CoordinatorLayout) rootView, binding_bottomSheetLayout,
-          container, fabAdd, fabSeach, fabSwitchcam, toolbar);
+          container, fabAdd, fabSeach, fabSwitchcam, progressBar, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

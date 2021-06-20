@@ -36,11 +36,13 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -141,6 +143,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   private long start, end;
   private double term;
 
+  private ProgressBar progressBar;
+  private int progressValueOn = 0;
+  private int progressValueOff = 0;
+
   //private HashMap<String, Classifier.Recognition> knownFaces = new HashMap<>();
 
 
@@ -154,6 +160,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         onAddClick();
       }
     });
+
+    progressBar = (ProgressBar)findViewById(R.id.progressBar);
+    progressBar.setProgress(0);
 
     Intent intent = getIntent();
     phase = intent.getIntExtra("phase", 1);
@@ -603,6 +612,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                   phase = 3;
                   if(countONDB == 3){
                     countONDB = 0;
+                    progressValueOn = 0;
+                    progressBar.setProgress(progressValueOn);
                     // MaskDetectorActivity로 전환 + Phase 값 (=3) 넘기기 -> DetectorAcitivity 닫기
                     Intent intent3 = new Intent(DetectorActivity.this, MaskDetectorActivity.class);
                     intent3.putExtra("phase", phase);
@@ -612,6 +623,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                   }
                   else{
                     countONDB = countONDB + 1;
+                    progressValueOn = progressValueOn + 33;
+                    progressValueOff = 0;
+                    progressBar.setProgress(progressValueOn);
                     countOFFDB = 0;
                   }
                 } else {
@@ -624,8 +638,11 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                     start = System.currentTimeMillis();
                     term = 0;
                     dialogFlag = 1;
-                    AlertDialog.Builder builder = new AlertDialog.Builder(DetectorActivity.this);
-                    dialogMessage = "등록이 안 되어 있습니다.";
+                    progressValueOff = 0;
+                    progressBar.setProgress(progressValueOff);
+                    ContextThemeWrapper cw = new ContextThemeWrapper(DetectorActivity.this, R.style.AlertDialogTheme);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(cw);
+                    dialogMessage = "죄송합니다.\n등록이 안 되어 있습니다.";
                     builder.setTitle("공지").setMessage(dialogMessage + "\n\n" + (int)((5000 - term)/1000));
                     builder.setPositiveButton("확인", new DialogInterface.OnClickListener(){
                       @Override
@@ -651,6 +668,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                 }
                 else{
                   countOFFDB = countOFFDB + 1;
+                  progressValueOff = progressValueOff + 33;
+                  progressValueOn = 0;
+                  progressBar.setProgress(progressValueOff);
                   countONDB = 0;
                   //Log.v("test", "->" + countOFFDB);
                 }
