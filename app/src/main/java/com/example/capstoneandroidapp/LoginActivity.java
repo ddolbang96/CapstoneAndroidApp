@@ -21,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText et_id, et_pass;
     private Button btn_login, btn_register;
+    private int phase = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +59,9 @@ public class LoginActivity extends AppCompatActivity {
                                 String userID = jsonObject.getString("userID");
                                 String userPass = jsonObject.getString("userPassword");
                                 Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
-                                //Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                Intent intent = new Intent(LoginActivity.this, DetectorActivity.class);
-                                //intent.putExtra("userID", userID);
-                                //intent.putExtra("userPass", userPass);
+                                Intent intent = new Intent(LoginActivity.this, MaskDetectorActivity.class);
+                                intent.putExtra("phase", phase);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                             }else{
                                 Toast.makeText(getApplicationContext(), "Login Fail", Toast.LENGTH_SHORT).show();

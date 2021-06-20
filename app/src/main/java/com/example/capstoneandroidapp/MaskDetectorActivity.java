@@ -16,8 +16,10 @@
 
 package com.example.capstoneandroidapp;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -28,6 +30,7 @@ import android.graphics.Typeface;
 import android.hardware.camera2.CameraCharacteristics;
 import android.media.ImageReader.OnImageAvailableListener;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Size;
 import android.util.TypedValue;
@@ -116,11 +119,14 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
   // here the face is cropped and drawn
   private Bitmap faceBmp = null;
 
+  private int phase;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
+    Intent intent = getIntent();
+    phase = intent.getIntExtra("phase", 1);
 
     // Real-time contour detection of multiple faces
     FaceDetectorOptions options =
@@ -134,7 +140,6 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
     FaceDetector detector = FaceDetection.getClient(options);
 
     faceDetector = detector;
-
 
     //checkWritePermission();
 
@@ -181,8 +186,6 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
     rgbFrameBitmap = Bitmap.createBitmap(previewWidth, previewHeight, Config.ARGB_8888);
 
 
-
-
     int targetW, targetH;
     if (sensorOrientation == 90 || sensorOrientation == 270) {
       targetH = previewWidth;
@@ -194,6 +197,7 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
     }
     int cropW = (int) (targetW / 2.0);
     int cropH = (int) (targetH / 2.0);
+
 
     croppedBitmap = Bitmap.createBitmap(cropW, cropH, Config.ARGB_8888);
 
@@ -232,7 +236,6 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
     tracker.setFrameConfiguration(previewWidth, previewHeight, sensorOrientation);
   }
 
-
   @Override
   protected void processImage() {
     ++timestamp;
@@ -258,28 +261,26 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
       ImageUtils.saveBitmap(croppedBitmap);
     }
 
-    InputImage image = InputImage.fromBitmap(croppedBitmap, 0);
-    faceDetector
-            .process(image)
-            .addOnSuccessListener(new OnSuccessListener<List<Face>>() {
-              @Override
-              public void onSuccess(List<Face> faces) {
-                if (faces.size() == 0) {
-                  updateResults(currTimestamp, new LinkedList<>());
-                  return;
-                }
-                runInBackground(
-                        new Runnable() {
-                          @Override
-                          public void run() {
-                            onFacesDetected(currTimestamp, faces);
-                          }
-                        });
-              }
+        InputImage image = InputImage.fromBitmap(croppedBitmap, 0);
+        faceDetector
+                .process(image)
+                .addOnSuccessListener(new OnSuccessListener<List<Face>>() {
+                  @Override
+                  public void onSuccess(List<Face> faces) {
+                    if (faces.size() == 0) { // 마스크 안 씀
+                      updateResults(currTimestamp, new LinkedList<>());
+                      return;
+                    }
+                    runInBackground(
+                            new Runnable() {
+                              @Override
+                              public void run() {
+                                onFacesDetected(currTimestamp, faces);
+                              }
+                            });
+                  }
 
-            });
-
-
+                });
   }
 
   @Override
@@ -408,94 +409,141 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
 
     boolean saved = false;
 
-    for (Face face : faces) {
+    Handler handler = new Handler();
+    handler.postDelayed(new Runnable(){
+      @Override
+      public void run() {
+        Intent intent2 = getIntent();
+        phase = intent2.getIntExtra("phase", 1);
 
-      LOGGER.i("FACE" + face.toString());
+        for (Face face : faces) {
+          LOGGER.i("FACE" + face.toString());
 
-      LOGGER.i("Running detection on face " + currTimestamp);
+          LOGGER.i("Running detection on face " + currTimestamp);
 
-      //results = detector.recognizeImage(croppedBitmap);
-
-
-      final RectF boundingBox = new RectF(face.getBoundingBox());
-
-      //final boolean goodConfidence = result.getConfidence() >= minimumConfidence;
-      final boolean goodConfidence = true; //face.get;
-      if (boundingBox != null && goodConfidence) {
-
-        // maps crop coordinates to original
-        cropToFrameTransform.mapRect(boundingBox);
-
-        // maps original coordinates to portrait coordinates
-        RectF faceBB = new RectF(boundingBox);
-        transform.mapRect(faceBB);
-
-        // translates portrait to origin and scales to fit input inference size
-        //cv.drawRect(faceBB, paint);
-        float sx = ((float) TF_OD_API_INPUT_SIZE) / faceBB.width();
-        float sy = ((float) TF_OD_API_INPUT_SIZE) / faceBB.height();
-        Matrix matrix = new Matrix();
-        matrix.postTranslate(-faceBB.left, -faceBB.top);
-        matrix.postScale(sx, sy);
-
-        cvFace.drawBitmap(portraitBmp, matrix, null);
+          //results = detector.recognizeImage(croppedBitmap);
 
 
-        String label = "";
-        float confidence = -1f;
-        Integer color = Color.BLUE;
+          final RectF boundingBox = new RectF(face.getBoundingBox());
 
-        final long startTime = SystemClock.uptimeMillis();
-        final List<Classifier.Recognition> resultsAux = detector.recognizeImage(faceBmp);
-        lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
+          //final boolean goodConfidence = result.getConfidence() >= minimumConfidence;
+          final boolean goodConfidence = true; //face.get;
+          if (boundingBox != null && goodConfidence) {
 
-        if (resultsAux.size() > 0) {
+            // maps crop coordinates to original
+            cropToFrameTransform.mapRect(boundingBox);
 
-          Classifier.Recognition result = resultsAux.get(0);
+            // maps original coordinates to portrait coordinates
+            RectF faceBB = new RectF(boundingBox);
+            transform.mapRect(faceBB);
 
-          float conf = result.getConfidence();
-          if (conf >= 0.6f) {
+            // translates portrait to origin and scales to fit input inference size
+            //cv.drawRect(faceBB, paint);
+            float sx = ((float) TF_OD_API_INPUT_SIZE) / faceBB.width();
+            float sy = ((float) TF_OD_API_INPUT_SIZE) / faceBB.height();
+            Matrix matrix = new Matrix();
+            matrix.postTranslate(-faceBB.left, -faceBB.top);
+            matrix.postScale(sx, sy);
 
-            confidence = conf;
-            label = result.getTitle();
-            if (result.getId().equals("0")) {
-              color = Color.GREEN;
+            cvFace.drawBitmap(portraitBmp, matrix, null);
+
+
+            String label = "";
+            float confidence = -1f;
+            Integer color = Color.BLUE;
+
+            final long startTime = SystemClock.uptimeMillis();
+            final List<Classifier.Recognition> resultsAux = detector.recognizeImage(faceBmp);
+            lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
+
+            if (resultsAux.size() > 0) {
+
+              Classifier.Recognition result = resultsAux.get(0);
+
+              float conf = result.getConfidence();
+              if (conf >= 0.6f) {
+
+                confidence = conf;
+                label = result.getTitle();
+                if (result.getId().equals("0")) {
+                  color = Color.GREEN;
+                  // 마스크 쓴 경우
+                  if(phase == 1){
+                    // 마스크 벗어달라고 팝업 띄우기 (PopupActivity 로 전환 + Phase 값 넘기기 -> MaskDetectorActivity 닫기)
+                    Intent intent3 = new Intent(MaskDetectorActivity.this, PopupActivity.class);
+                    intent3.putExtra("data", "마스크를 벗어주세요.");
+                    intent3.putExtra("phase", phase);
+                    intent3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    //finish();
+                    startActivity(intent3);
+                  }
+                  else if(phase == 3){
+                    // 환영한다는 팝업 띄우기 (PopupActivity 로 전환 + Phase 값 넘기기 -> MaskDetectorActivity 닫기)
+                    Intent intent4 = new Intent(MaskDetectorActivity.this, PopupActivity.class);
+                    intent4.putExtra("data", "환영합니다.");
+                    phase = 1;
+                    intent4.putExtra("phase", phase);
+                    intent4.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    //finish();
+                    startActivity(intent4);
+                  }
+                }
+                else {
+                  color = Color.RED;
+                  // 마스크 안 쓴 경우
+                    if(phase == 1){
+                      // DetectorActivity 로 전환 + Phase 값 (=2) 넘기기 -> MaskDetectorActivity 닫기
+                      Intent intent5 = new Intent(MaskDetectorActivity.this, DetectorActivity.class);
+                      phase = 2;
+                      intent5.putExtra("phase", phase);
+                      intent5.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                      //finish();
+                      startActivity(intent5);
+                    }
+                    else if(phase == 3){
+                      // 마스크 다시 써달라고 팝업 띄우기 (PopupActivity 로 전환 + Phase 값 넘기기 -> MaskDetectorActivity 닫기)
+                      Intent intent6 = new Intent(MaskDetectorActivity.this, PopupActivity.class);
+                      intent6.putExtra("data", "마스크를 다시 써주세요.");
+                      intent6.putExtra("phase", phase);
+                      intent6.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                      //finish();
+                      startActivity(intent6);
+                    }
+
+                }
+              }
+
             }
-            else {
-              color = Color.RED;
+
+            if (getCameraFacing() == CameraCharacteristics.LENS_FACING_FRONT) {
+
+              // camera is frontal so the image is flipped horizontally
+              // flips horizontally
+              Matrix flip = new Matrix();
+              if (sensorOrientation == 90 || sensorOrientation == 270) {
+                flip.postScale(1, -1, previewWidth / 2.0f, previewHeight / 2.0f);
+              }
+              else {
+                flip.postScale(-1, 1, previewWidth / 2.0f, previewHeight / 2.0f);
+              }
+              //flip.postScale(1, -1, targetW / 2.0f, targetH / 2.0f);
+              flip.mapRect(boundingBox);
+
             }
+
+            final Classifier.Recognition result = new Classifier.Recognition(
+                    "0", label, confidence, boundingBox);
+
+            result.setColor(color);
+            result.setLocation(boundingBox);
+            mappedRecognitions.add(result);
           }
+
+
 
         }
-
-        if (getCameraFacing() == CameraCharacteristics.LENS_FACING_FRONT) {
-
-          // camera is frontal so the image is flipped horizontally
-          // flips horizontally
-          Matrix flip = new Matrix();
-          if (sensorOrientation == 90 || sensorOrientation == 270) {
-            flip.postScale(1, -1, previewWidth / 2.0f, previewHeight / 2.0f);
-          }
-          else {
-            flip.postScale(-1, 1, previewWidth / 2.0f, previewHeight / 2.0f);
-          }
-          //flip.postScale(1, -1, targetW / 2.0f, targetH / 2.0f);
-          flip.mapRect(boundingBox);
-
-        }
-
-        final Classifier.Recognition result = new Classifier.Recognition(
-                "0", label, confidence, boundingBox);
-
-        result.setColor(color);
-        result.setLocation(boundingBox);
-        mappedRecognitions.add(result);
-
-
       }
-
-
-    }
+    }, 1000);
 
     //    if (saved) {
 //      lastSaved = System.currentTimeMillis();

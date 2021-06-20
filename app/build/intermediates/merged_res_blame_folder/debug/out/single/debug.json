@@ -20,6 +20,10 @@
         "source": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
     },
     {
+        "merged": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\build\\intermediates\\res\\merged\\debug\\navigation_nav_graph.xml.flat",
+        "source": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\src\\main\\res\\navigation\\nav_graph.xml"
+    },
+    {
         "merged": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",
         "source": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\src\\main\\res\\layout\\activity_main.xml"
     },
@@ -60,12 +64,20 @@
         "source": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\src\\main\\res\\layout\\activity_register.xml"
     },
     {
+        "merged": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_popup.xml.flat",
+        "source": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\src\\main\\res\\layout\\activity_popup.xml"
+    },
+    {
         "merged": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
     },
     {
         "merged": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_second.xml.flat",
+        "source": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\src\\main\\res\\layout\\fragment_second.xml"
     },
     {
         "merged": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_tfe_od_camera_connection_fragment_tracking.xml.flat",
@@ -82,6 +94,10 @@
     {
         "merged": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_content_popup.xml.flat",
+        "source": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\src\\main\\res\\layout\\content_popup.xml"
     },
     {
         "merged": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_sample_image.jpg.flat",
@@ -118,6 +134,10 @@
     {
         "merged": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_first.xml.flat",
+        "source": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\src\\main\\res\\layout\\fragment_first.xml"
     },
     {
         "merged": "C:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable_bottom_sheet_bg.xml.flat",

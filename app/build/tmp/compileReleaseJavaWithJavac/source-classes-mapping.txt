@@ -5,11 +5,14 @@ com/example/capstoneandroidapp/MaskDetectorActivity.java
  com.example.capstoneandroidapp.MaskDetectorActivity$2$1
  com.example.capstoneandroidapp.MaskDetectorActivity$3
  com.example.capstoneandroidapp.MaskDetectorActivity$4
+ com.example.capstoneandroidapp.MaskDetectorActivity$5
  com.example.capstoneandroidapp.MaskDetectorActivity$DetectorMode
 com/example/capstoneandroidapp/tracking/MultiBoxTracker.java
  com.example.capstoneandroidapp.tracking.MultiBoxTracker
  com.example.capstoneandroidapp.tracking.MultiBoxTracker$1
  com.example.capstoneandroidapp.tracking.MultiBoxTracker$TrackedRecognition
+com/example/capstoneandroidapp/databinding/FragmentFirstBinding.java
+ com.example.capstoneandroidapp.databinding.FragmentFirstBinding
 com/example/capstoneandroidapp/env/Size.java
  com.example.capstoneandroidapp.env.Size
 com/example/capstoneandroidapp/tflite/SimilarityClassifier.java
@@ -44,14 +47,25 @@ com/example/capstoneandroidapp/CameraConnectionFragment.java
  com.example.capstoneandroidapp.CameraConnectionFragment$ErrorDialog$1
 com/example/capstoneandroidapp/env/Logger.java
  com.example.capstoneandroidapp.env.Logger
+com/example/capstoneandroidapp/databinding/ContentPopupBinding.java
+ com.example.capstoneandroidapp.databinding.ContentPopupBinding
 com/example/capstoneandroidapp/RegisterRequest.java
  com.example.capstoneandroidapp.RegisterRequest
+com/example/capstoneandroidapp/FirstFragment.java
+ com.example.capstoneandroidapp.FirstFragment
+ com.example.capstoneandroidapp.FirstFragment$1
 com/example/capstoneandroidapp/LegacyCameraConnectionFragment.java
  com.example.capstoneandroidapp.LegacyCameraConnectionFragment
  com.example.capstoneandroidapp.LegacyCameraConnectionFragment$1
 com/example/capstoneandroidapp/tflite/Classifier.java
  com.example.capstoneandroidapp.tflite.Classifier
  com.example.capstoneandroidapp.tflite.Classifier$Recognition
+com/example/capstoneandroidapp/databinding/ActivityPopupBinding.java
+ com.example.capstoneandroidapp.databinding.ActivityPopupBinding
+com/example/capstoneandroidapp/databinding/ImageEditDialogBinding.java
+ com.example.capstoneandroidapp.databinding.ImageEditDialogBinding
+com/example/capstoneandroidapp/databinding/FragmentSecondBinding.java
+ com.example.capstoneandroidapp.databinding.FragmentSecondBinding
 com/example/capstoneandroidapp/DetectorActivity.java
  com.example.capstoneandroidapp.DetectorActivity
  com.example.capstoneandroidapp.DetectorActivity$1
@@ -61,6 +75,7 @@ com/example/capstoneandroidapp/DetectorActivity.java
  com.example.capstoneandroidapp.DetectorActivity$4
  com.example.capstoneandroidapp.DetectorActivity$5
  com.example.capstoneandroidapp.DetectorActivity$6
+ com.example.capstoneandroidapp.DetectorActivity$7
  com.example.capstoneandroidapp.DetectorActivity$DetectorMode
 com/example/capstoneandroidapp/MainActivity.java
  com.example.capstoneandroidapp.MainActivity
@@ -68,10 +83,20 @@ com/example/capstoneandroidapp/tracking/MaskMultiBoxTracker.java
  com.example.capstoneandroidapp.tracking.MaskMultiBoxTracker
  com.example.capstoneandroidapp.tracking.MaskMultiBoxTracker$1
  com.example.capstoneandroidapp.tracking.MaskMultiBoxTracker$TrackedRecognition
+com/example/capstoneandroidapp/databinding/ActivityLoginBinding.java
+ com.example.capstoneandroidapp.databinding.ActivityLoginBinding
+com/example/capstoneandroidapp/databinding/TfeOdCameraConnectionFragmentTrackingBinding.java
+ com.example.capstoneandroidapp.databinding.TfeOdCameraConnectionFragmentTrackingBinding
 com/example/capstoneandroidapp/customview/RecognitionScoreView.java
  com.example.capstoneandroidapp.customview.RecognitionScoreView
+com/example/capstoneandroidapp/databinding/TfeOdLayoutBottomSheetBinding.java
+ com.example.capstoneandroidapp.databinding.TfeOdLayoutBottomSheetBinding
+com/example/capstoneandroidapp/databinding/TfeOdActivityCameraBinding.java
+ com.example.capstoneandroidapp.databinding.TfeOdActivityCameraBinding
 com/example/capstoneandroidapp/tflite/MaskTFLiteObjectDetectionAPIModel.java
  com.example.capstoneandroidapp.tflite.MaskTFLiteObjectDetectionAPIModel
+com/example/capstoneandroidapp/databinding/MaskTfeOdActivityCameraBinding.java
+ com.example.capstoneandroidapp.databinding.MaskTfeOdActivityCameraBinding
 com/example/capstoneandroidapp/MaskCameraActivity.java
  com.example.capstoneandroidapp.MaskCameraActivity
  com.example.capstoneandroidapp.MaskCameraActivity$1
@@ -82,15 +107,24 @@ com/example/capstoneandroidapp/MaskCameraActivity.java
  com.example.capstoneandroidapp.MaskCameraActivity$6
  com.example.capstoneandroidapp.MaskCameraActivity$7
  com.example.capstoneandroidapp.MaskCameraActivity$8
+com/example/capstoneandroidapp/PopupActivity.java
+ com.example.capstoneandroidapp.PopupActivity
 com/example/capstoneandroidapp/customview/AutoFitTextureView.java
  com.example.capstoneandroidapp.customview.AutoFitTextureView
 com/example/capstoneandroidapp/customview/OverlayView.java
  com.example.capstoneandroidapp.customview.OverlayView
  com.example.capstoneandroidapp.customview.OverlayView$DrawCallback
+com/example/capstoneandroidapp/SecondFragment.java
+ com.example.capstoneandroidapp.SecondFragment
+ com.example.capstoneandroidapp.SecondFragment$1
 com/example/capstoneandroidapp/BuildConfig.java
  com.example.capstoneandroidapp.BuildConfig
+com/example/capstoneandroidapp/databinding/ActivityRegisterBinding.java
+ com.example.capstoneandroidapp.databinding.ActivityRegisterBinding
 com/example/capstoneandroidapp/env/ImageUtils.java
  com.example.capstoneandroidapp.env.ImageUtils
+com/example/capstoneandroidapp/databinding/ActivityMainBinding.java
+ com.example.capstoneandroidapp.databinding.ActivityMainBinding
 com/example/capstoneandroidapp/LoginActivity.java
  com.example.capstoneandroidapp.LoginActivity
  com.example.capstoneandroidapp.LoginActivity$1

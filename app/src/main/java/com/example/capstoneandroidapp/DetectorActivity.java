@@ -18,6 +18,7 @@ package com.example.capstoneandroidapp;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -30,6 +31,7 @@ import android.graphics.Typeface;
 import android.hardware.camera2.CameraCharacteristics;
 import android.media.ImageReader.OnImageAvailableListener;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
 import android.util.Size;
@@ -49,6 +51,7 @@ import com.google.mlkit.vision.face.FaceDetection;
 import com.google.mlkit.vision.face.FaceDetector;
 import com.google.mlkit.vision.face.FaceDetectorOptions;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -129,6 +132,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
   private FloatingActionButton fabAdd;
 
+  private int phase;
+
   //private HashMap<String, Classifier.Recognition> knownFaces = new HashMap<>();
 
 
@@ -143,6 +148,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
       }
     });
 
+    Intent intent = getIntent();
+    phase = intent.getIntExtra("phase", 1);
 
 
     // Real-time contour detection of multiple faces
@@ -162,8 +169,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     //checkWritePermission();
 
   }
-
-
 
   private void onAddClick() {
 
@@ -296,7 +301,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     }
 
     InputImage image = InputImage.fromBitmap(croppedBitmap, 0);
-    faceDetector.process(image).addOnSuccessListener(new OnSuccessListener<List<Face>>() {
+    faceDetector
+            .process(image)
+            .addOnSuccessListener(new OnSuccessListener<List<Face>>() {
               @Override
               public void onSuccess(List<Face> faces) {
                 if (faces.size() == 0) {
@@ -447,158 +454,177 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
   }
 
-
   /////////////////////////////////////////////////////////////////////////////////////////////////
 
   private void onFacesDetected(long currTimestamp, List<Face> faces, boolean add) {
-    cropCopyBitmap = Bitmap.createBitmap(croppedBitmap);
-    final Canvas canvas = new Canvas(cropCopyBitmap);
-    final Paint paint = new Paint();
-    paint.setColor(Color.RED);
-    paint.setStyle(Style.STROKE);
-    paint.setStrokeWidth(2.0f);
 
-    float minimumConfidence = MINIMUM_CONFIDENCE_TF_OD_API;
-    switch (MODE) {
-      case TF_OD_API:
-        minimumConfidence = MINIMUM_CONFIDENCE_TF_OD_API;
-        break;
-    }
+    Handler handler = new Handler();
+    handler.postDelayed(new Runnable(){
+      @Override
+      public void run() {
 
-    final List<SimilarityClassifier.Recognition> mappedRecognitions =
-            new LinkedList<SimilarityClassifier.Recognition>();
+        cropCopyBitmap = Bitmap.createBitmap(croppedBitmap);
+        final Canvas canvas = new Canvas(cropCopyBitmap);
+        final Paint paint = new Paint();
+        paint.setColor(Color.RED);
+        paint.setStyle(Style.STROKE);
+        paint.setStrokeWidth(2.0f);
 
-    //final List<Classifier.Recognition> results = new ArrayList<>();
-
-    // Note this can be done only once
-    int sourceW = rgbFrameBitmap.getWidth();
-    int sourceH = rgbFrameBitmap.getHeight();
-    int targetW = portraitBmp.getWidth();
-    int targetH = portraitBmp.getHeight();
-    Matrix transform = createTransform(
-            sourceW,
-            sourceH,
-            targetW,
-            targetH,
-            sensorOrientation);
-    final Canvas cv = new Canvas(portraitBmp);
-
-    // draws the original image in portrait mode.
-    cv.drawBitmap(rgbFrameBitmap, transform, null);
-
-    final Canvas cvFace = new Canvas(faceBmp);
-
-    boolean saved = false;
-
-    for (Face face : faces) {
-      LOGGER.i("FACE" + face.toString());
-      LOGGER.i("Running detection on face " + currTimestamp);
-      //results = detector.recognizeImage(croppedBitmap);
-
-      final RectF boundingBox = new RectF(face.getBoundingBox());
-
-      //final boolean goodConfidence = result.getConfidence() >= minimumConfidence;
-      final boolean goodConfidence = true; //face.get;
-      if (boundingBox != null && goodConfidence) {
-
-        // maps crop coordinates to original
-        cropToFrameTransform.mapRect(boundingBox);
-
-        // maps original coordinates to portrait coordinates
-        RectF faceBB = new RectF(boundingBox);
-        transform.mapRect(faceBB);
-
-        // translates portrait to origin and scales to fit input inference size
-        //cv.drawRect(faceBB, paint);
-        float sx = ((float) TF_OD_API_INPUT_SIZE) / faceBB.width();
-        float sy = ((float) TF_OD_API_INPUT_SIZE) / faceBB.height();
-        Matrix matrix = new Matrix();
-        matrix.postTranslate(-faceBB.left, -faceBB.top);
-        matrix.postScale(sx, sy);
-
-        cvFace.drawBitmap(portraitBmp, matrix, null);
-
-        //canvas.drawRect(faceBB, paint);
-
-        String label = "";
-        float confidence = -1f;
-        Integer color = Color.BLUE;
-        Object extra = null;
-        Bitmap crop = null;
-
-        if (add) {
-          crop = Bitmap.createBitmap(portraitBmp,
-                            (int) faceBB.left,
-                            (int) faceBB.top,
-                            (int) faceBB.width(),
-                            (int) faceBB.height());
+        float minimumConfidence = MINIMUM_CONFIDENCE_TF_OD_API;
+        switch (MODE) {
+          case TF_OD_API:
+            minimumConfidence = MINIMUM_CONFIDENCE_TF_OD_API;
+            break;
         }
 
-        final long startTime = SystemClock.uptimeMillis();
-        final List<SimilarityClassifier.Recognition> resultsAux = detector.recognizeImage(faceBmp, add);
-        lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
+        final List<SimilarityClassifier.Recognition> mappedRecognitions =
+                new LinkedList<SimilarityClassifier.Recognition>();
 
-        if (resultsAux.size() > 0) {
+        //final List<Classifier.Recognition> results = new ArrayList<>();
 
-          SimilarityClassifier.Recognition result = resultsAux.get(0);
+        // Note this can be done only once
+        int sourceW = rgbFrameBitmap.getWidth();
+        int sourceH = rgbFrameBitmap.getHeight();
+        int targetW = portraitBmp.getWidth();
+        int targetH = portraitBmp.getHeight();
+        Matrix transform = createTransform(
+                sourceW,
+                sourceH,
+                targetW,
+                targetH,
+                sensorOrientation);
+        final Canvas cv = new Canvas(portraitBmp);
 
-          extra = result.getExtra();
-//          Object extra = result.getExtra();
-//          if (extra != null) {
-//            LOGGER.i("embeeding retrieved " + extra.toString());
-//          }
+        // draws the original image in portrait mode.
+        cv.drawBitmap(rgbFrameBitmap, transform, null);
 
-          // getting name from DB
-          float conf = result.getDistance();
-          if (conf < 1.0f) {
+        final Canvas cvFace = new Canvas(faceBmp);
 
-            confidence = conf;
-            label = result.getTitle();
-            if (result.getId().equals("0")) {
-              color = Color.GREEN;
+        boolean saved = false;
+
+        Intent intent = getIntent();
+        phase = intent.getIntExtra("phase", 1);
+
+        for (Face face : faces) {
+          LOGGER.i("FACE" + face.toString());
+          LOGGER.i("Running detection on face " + currTimestamp);
+          //results = detector.recognizeImage(croppedBitmap);
+
+          final RectF boundingBox = new RectF(face.getBoundingBox());
+
+          //final boolean goodConfidence = result.getConfidence() >= minimumConfidence;
+          final boolean goodConfidence = true; //face.get;
+          if (boundingBox != null && goodConfidence) {
+
+            // maps crop coordinates to original
+            cropToFrameTransform.mapRect(boundingBox);
+
+            // maps original coordinates to portrait coordinates
+            RectF faceBB = new RectF(boundingBox);
+            transform.mapRect(faceBB);
+
+            // translates portrait to origin and scales to fit input inference size
+            //cv.drawRect(faceBB, paint);
+            float sx = ((float) TF_OD_API_INPUT_SIZE) / faceBB.width();
+            float sy = ((float) TF_OD_API_INPUT_SIZE) / faceBB.height();
+            Matrix matrix = new Matrix();
+            matrix.postTranslate(-faceBB.left, -faceBB.top);
+            matrix.postScale(sx, sy);
+
+            cvFace.drawBitmap(portraitBmp, matrix, null);
+
+            //canvas.drawRect(faceBB, paint);
+
+            String label = "";
+            float confidence = -1f;
+            Integer color = Color.BLUE;
+            Object extra = null;
+            Bitmap crop = null;
+
+            if (add) {
+              crop = Bitmap.createBitmap(portraitBmp,
+                      (int) faceBB.left,
+                      (int) faceBB.top,
+                      (int) faceBB.width(),
+                      (int) faceBB.height());
             }
-            else {
-              color = Color.RED;
+
+            final long startTime = SystemClock.uptimeMillis();
+            final List<SimilarityClassifier.Recognition> resultsAux = detector.recognizeImage(faceBmp, add);
+            lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
+
+            if (resultsAux.size() > 0) {
+
+              SimilarityClassifier.Recognition result = resultsAux.get(0);
+
+              extra = result.getExtra();
+  //          Object extra = result.getExtra();
+  //          if (extra != null) {
+  //            LOGGER.i("embeeding retrieved " + extra.toString());
+  //          }
+
+              float conf = result.getDistance();
+              if (conf < 1.0f) { // DB에 일치하는 사람이 있는 경우
+                confidence = conf;
+                label = result.getTitle();
+                if (result.getId().equals("0")) {
+                  color = Color.GREEN;
+                  phase = 3;
+                  // MaskDetectorActivity로 전환 + Phase 값 (=3) 넘기기 -> DetectorAcitivity 닫기
+                  Intent intent3 = new Intent(DetectorActivity.this, MaskDetectorActivity.class);
+                  intent3.putExtra("phase", phase);
+                  intent3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                  //finish();
+                  startActivity(intent3);
+                } else {
+                  color = Color.RED;
+                }
+              }
+              else{ // DB에 일치하는 사람이 없는 경우
+                // "등록이 안 되어있다"는 팝업 띄우기 (PopupActivity 로 전환 + Phase 값 (=1) 넘기기 -> DetectorActivity 닫기
+                Intent intent2 = new Intent(DetectorActivity.this, PopupActivity.class);
+                intent2.putExtra("data", "등록이 안 되어 있습니다.");
+                phase = 1;
+                intent2.putExtra("phase", phase);
+                intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                //finish();
+                startActivity(intent2);
+              }
             }
-          }
 
+            if (getCameraFacing() == CameraCharacteristics.LENS_FACING_FRONT) {
+
+              // camera is frontal so the image is flipped horizontally
+              // flips horizontally
+              Matrix flip = new Matrix();
+              if (sensorOrientation == 90 || sensorOrientation == 270) {
+                flip.postScale(1, -1, previewWidth / 2.0f, previewHeight / 2.0f);
+              }
+              else {
+                flip.postScale(-1, 1, previewWidth / 2.0f, previewHeight / 2.0f);
+              }
+              //flip.postScale(1, -1, targetW / 2.0f, targetH / 2.0f);
+              flip.mapRect(boundingBox);
+
+            }
+
+            final SimilarityClassifier.Recognition result = new SimilarityClassifier.Recognition(
+                    "0", label, confidence, boundingBox);
+
+            result.setColor(color);
+            result.setLocation(boundingBox);
+            result.setExtra(extra);
+            result.setCrop(crop);
+            mappedRecognitions.add(result);
+
+          }
         }
 
-        if (getCameraFacing() == CameraCharacteristics.LENS_FACING_FRONT) {
-
-          // camera is frontal so the image is flipped horizontally
-          // flips horizontally
-          Matrix flip = new Matrix();
-          if (sensorOrientation == 90 || sensorOrientation == 270) {
-            flip.postScale(1, -1, previewWidth / 2.0f, previewHeight / 2.0f);
-          }
-          else {
-            flip.postScale(-1, 1, previewWidth / 2.0f, previewHeight / 2.0f);
-          }
-          //flip.postScale(1, -1, targetW / 2.0f, targetH / 2.0f);
-          flip.mapRect(boundingBox);
-
-        }
-
-        final SimilarityClassifier.Recognition result = new SimilarityClassifier.Recognition(
-                "0", label, confidence, boundingBox);
-
-        result.setColor(color);
-        result.setLocation(boundingBox);
-        result.setExtra(extra);
-        result.setCrop(crop);
-        mappedRecognitions.add(result);
-
-      }
-    }
-    //    if (saved) {
+        //    if (saved) {
 //      lastSaved = System.currentTimeMillis();
 //    }
-    updateResults(currTimestamp, mappedRecognitions);
+        updateResults(currTimestamp, mappedRecognitions);
+      }
+    },1000);
   }
-
-
-
-
-
 }

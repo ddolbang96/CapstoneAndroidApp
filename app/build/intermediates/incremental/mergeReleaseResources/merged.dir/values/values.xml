@@ -73,7 +73,9 @@
         <enum name="rectangles" value="5"/>
     </attr>
     <attr format="reference" name="drawerArrowStyle"/>
+    <attr format="reference" name="drawerLayoutStyle"/>
     <attr format="integer" name="duration"/>
+    <attr format="dimension" name="elevation"/>
     <attr format="color" name="elevationOverlayColor"/>
     <attr format="boolean" name="elevationOverlayEnabled"/>
     <attr format="boolean" name="ensureMinTouchTargetSize"/>
@@ -613,6 +615,7 @@
     <dimen name="compat_control_corner_material">2dp</dimen>
     <dimen name="compat_notification_large_icon_max_height">320dp</dimen>
     <dimen name="compat_notification_large_icon_max_width">320dp</dimen>
+    <dimen name="def_drawer_elevation">10dp</dimen>
     <dimen name="default_dimension">100dp</dimen>
     <dimen name="design_appbar_elevation">4dp</dimen>
     <dimen name="design_bottom_navigation_active_item_max_width">168dp</dimen>
@@ -663,6 +666,7 @@
     <dimen name="design_textinput_caption_translate_y">5dp</dimen>
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
+    <dimen name="fab_margin">16dp</dimen>
     <dimen name="fastscroll_default_thickness">8dp</dimen>
     <dimen name="fastscroll_margin">0dp</dimen>
     <dimen name="fastscroll_minimum_range">50dp</dimen>
@@ -971,6 +975,8 @@
     <item name="mtrl_internal_children_alpha_tag" type="id"/>
     <item name="mtrl_motion_snapshot_view" type="id"/>
     <item name="mtrl_view_tag_bottom_padding" type="id"/>
+    <item name="nav_controller_view_tag" type="id"/>
+    <item name="nav_host_fragment_container" type="id"/>
     <item name="parent_matrix" type="id"/>
     <item name="progress_circular" type="id"/>
     <item name="progress_horizontal" type="id"/>
@@ -1021,6 +1027,7 @@
     <integer name="app_bar_elevation_anim_duration">150</integer>
     <integer name="bottom_sheet_slide_duration">150</integer>
     <integer name="cancel_button_image_alpha">127</integer>
+    <integer name="config_navAnimTime">150</integer>
     <integer name="config_tooltipAnimTime">150</integer>
     <integer name="design_snackbar_text_max_lines">2</integer>
     <integer name="design_tab_indicator_anim_duration_ms">300</integer>
@@ -1100,6 +1107,9 @@
     <string name="exposed_dropdown_menu_content_description">Show dropdown menu</string>
     <string name="fab_transformation_scrim_behavior" translatable="false">com.google.android.material.transformation.FabTransformationScrimBehavior</string>
     <string name="fab_transformation_sheet_behavior" translatable="false">com.google.android.material.transformation.FabTransformationSheetBehavior</string>
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="hide_bottom_view_on_scroll_behavior" translatable="false">com.google.android.material.behavior.HideBottomViewOnScrollBehavior</string>
     <string description="Content description for an icon that appears in the title area of a dialog" name="icon_content_description">Dialog Icon</string>
     <string name="item_view_role_description">Tab</string>
@@ -1153,15 +1163,21 @@
     <string description="a11y string to indicate this button switches the user to choosing a day [CHAR_LIMIT=NONE]" name="mtrl_picker_toggle_to_day_selection">Tap to switch to selecting a day</string>
     <string description="a11y string to indicate this button changes the input mode to a text field [CHAR_LIMIT=NONE]" name="mtrl_picker_toggle_to_text_input_mode">Switch to text input mode</string>
     <string description="a11y string to indicate this button switches the user to choosing a year [CHAR_LIMIT=NONE]" name="mtrl_picker_toggle_to_year_selection">Tap to switch to selecting a year</string>
+    <string name="nav_app_bar_navigate_up_description">Navigate up</string>
+    <string name="nav_app_bar_open_drawer_description">Open navigation drawer</string>
+    <string name="next">Next</string>
     <string name="password_toggle_content_description">Show password</string>
     <string name="path_password_eye" translatable="false">M12,4.5C7,4.5 2.73,7.61 1,12c1.73,4.39 6,7.5 11,7.5s9.27,-3.11 11,-7.5c-1.73,-4.39 -6,-7.5 -11,-7.5zM12,17c-2.76,0 -5,-2.24 -5,-5s2.24,-5 5,-5 5,2.24 5,5 -2.24,5 -5,5zM12,9c-1.66,0 -3,1.34 -3,3s1.34,3 3,3 3,-1.34 3,-3 -1.34,-3 -3,-3z</string>
     <string name="path_password_eye_mask_strike_through" translatable="false">M2,4.27 L19.73,22 L22.27,19.46 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_eye_mask_visible" translatable="false">M2,4.27 L2,4.27 L4.54,1.73 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_strike_through" translatable="false">M3.27,4.27 L19.74,20.74</string>
+    <string name="previous">Previous</string>
     <string name="search_menu_title">Search</string>
+    <string name="second_fragment_label">Second Fragment</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="tfe_od_app_name" translation_description="Object Detection demo app [CHAR_LIMIT=40]">Face Recognition</string>
     <string name="tfe_od_camera_error" translation_description="Error regarding camera support[CHAR_LIMIT=40]">This device doesn\'t support Camera2 API.</string>
+    <string name="title_activity_popup">PopupActivity</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="AndroidThemeColorAccentYellow" ns2:ignore="NewApi">
@@ -3717,6 +3733,12 @@
         <item name="android:statusBarColor" ns2:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Theme.CapstoneAndroidApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="Theme.CapstoneAndroidApp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.CapstoneAndroidApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
     <style name="Theme.Design" parent="Theme.AppCompat">
   </style>
     <style name="Theme.Design.BottomSheetDialog" parent="Theme.AppCompat.Dialog">
@@ -5037,6 +5059,13 @@
              give a clue that sharing is to be performed.
          -->
         <attr format="reference" name="expandActivityOverflowButtonDrawable"/>
+    </declare-styleable>
+    <declare-styleable name="ActivityNavigator">
+        <attr name="android:name"/>
+        <attr format="string" name="action"/>
+        <attr format="string" name="data"/>
+        <attr format="string" name="dataPattern"/>
+        <attr format="string" name="targetPackage"/>
     </declare-styleable>
     <declare-styleable name="AlertDialog">
         <attr name="android:layout"/>
@@ -6403,6 +6432,9 @@
         </attr>
     </declare-styleable>
     <declare-styleable name="CustomAttribute"><attr format="string" name="attributeName"/><attr format="color" name="customColorValue"/><attr format="color" name="customColorDrawableValue"/><attr format="integer" name="customIntegerValue"/><attr format="float" name="customFloatValue"/><attr format="string" name="customStringValue"/><attr format="dimension" name="customDimension"/><attr format="dimension" name="customPixelDimension"/><attr format="boolean" name="customBoolean"/></declare-styleable>
+    <declare-styleable name="DialogFragmentNavigator">
+        <attr name="android:name"/>
+    </declare-styleable>
     <declare-styleable name="DrawerArrowToggle">
         <!-- The drawing color for the bars -->
         <attr format="color" name="color"/>
@@ -6420,6 +6452,10 @@
         <attr format="dimension" name="barLength"/>
         <!-- The thickness (stroke size) for the bar paint -->
         <attr format="dimension" name="thickness"/>
+    </declare-styleable>
+    <declare-styleable name="DrawerLayout">
+        <!-- The height difference between the drawer and the base surface. Only takes effect on API 21 and above -->
+        <attr name="elevation"/>
     </declare-styleable>
     <declare-styleable name="ExtendedFloatingActionButton">
     <!-- Elevation for the ExtendedFloatingActionButton. -->
@@ -6591,6 +6627,9 @@
     <declare-styleable name="FragmentContainerView">
         <attr name="android:name"/>
         <attr name="android:tag"/>
+    </declare-styleable>
+    <declare-styleable name="FragmentNavigator">
+        <attr name="android:name"/>
     </declare-styleable>
     <declare-styleable name="GradientColor">
         <!-- Start color of the gradient. -->
@@ -7146,6 +7185,41 @@
             <enum name="staticPostLayout" value="2"/>
             <enum name="staticLayout" value="3"/>
         </attr><attr format="color" name="telltales_tailColor"/><attr format="float" name="telltales_tailScale"/></declare-styleable>
+    <declare-styleable name="NavAction">
+        <attr name="android:id"/>
+        <attr format="reference" name="destination"/>
+        <attr format="boolean" name="launchSingleTop"/>
+        <attr format="reference" name="popUpTo"/>
+        <attr format="boolean" name="popUpToInclusive"/>
+        <attr format="reference" name="enterAnim"/>
+        <attr format="reference" name="exitAnim"/>
+        <attr format="reference" name="popEnterAnim"/>
+        <attr format="reference" name="popExitAnim"/>
+    </declare-styleable>
+    <declare-styleable name="NavArgument">
+        <attr name="android:name"/>
+        <attr name="android:defaultValue"/>
+        <attr format="boolean" name="nullable"/>
+        <attr format="string" name="argType"/>
+    </declare-styleable>
+    <declare-styleable name="NavDeepLink">
+        <attr format="string" name="uri"/>
+        <attr format="string" name="action"/>
+        <attr format="string" name="mimeType"/>
+        <attr name="android:autoVerify"/>
+    </declare-styleable>
+    <declare-styleable name="NavGraphNavigator">
+        <attr format="reference" name="startDestination"/>
+    </declare-styleable>
+    <declare-styleable name="NavHost">
+        <attr format="reference" name="navGraph"/>
+    </declare-styleable>
+    <declare-styleable name="NavHostFragment">
+        <attr format="boolean" name="defaultNavHost"/>
+    </declare-styleable>
+    <declare-styleable name="NavInclude">
+        <attr format="reference" name="graph"/>
+    </declare-styleable>
     <declare-styleable name="NavigationView">
     <attr name="android:background"/>
     <attr name="android:fitsSystemWindows"/>
@@ -7201,6 +7275,10 @@
     -->
     <attr name="shapeAppearanceOverlay"/>
   </declare-styleable>
+    <declare-styleable name="Navigator">
+        <attr name="android:id"/>
+        <attr name="android:label"/>
+    </declare-styleable>
     <declare-styleable name="OnClick"><attr name="targetId"/><attr name="clickAction">
             <flag name="toggle" value="0x0011"/>
             <flag name="transitionToEnd" value="0x0001"/>
