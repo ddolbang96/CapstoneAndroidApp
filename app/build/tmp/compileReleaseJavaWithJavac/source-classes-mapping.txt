@@ -5,6 +5,9 @@ com/example/capstoneandroidapp/MaskDetectorActivity.java
  com.example.capstoneandroidapp.MaskDetectorActivity$2$1
  com.example.capstoneandroidapp.MaskDetectorActivity$3
  com.example.capstoneandroidapp.MaskDetectorActivity$4
+ com.example.capstoneandroidapp.MaskDetectorActivity$4$1
+ com.example.capstoneandroidapp.MaskDetectorActivity$4$2
+ com.example.capstoneandroidapp.MaskDetectorActivity$4$3
  com.example.capstoneandroidapp.MaskDetectorActivity$5
  com.example.capstoneandroidapp.MaskDetectorActivity$DetectorMode
 com/example/capstoneandroidapp/tracking/MultiBoxTracker.java
@@ -47,8 +50,6 @@ com/example/capstoneandroidapp/CameraConnectionFragment.java
  com.example.capstoneandroidapp.CameraConnectionFragment$ErrorDialog$1
 com/example/capstoneandroidapp/env/Logger.java
  com.example.capstoneandroidapp.env.Logger
-com/example/capstoneandroidapp/databinding/ContentPopupBinding.java
- com.example.capstoneandroidapp.databinding.ContentPopupBinding
 com/example/capstoneandroidapp/RegisterRequest.java
  com.example.capstoneandroidapp.RegisterRequest
 com/example/capstoneandroidapp/FirstFragment.java
@@ -60,8 +61,6 @@ com/example/capstoneandroidapp/LegacyCameraConnectionFragment.java
 com/example/capstoneandroidapp/tflite/Classifier.java
  com.example.capstoneandroidapp.tflite.Classifier
  com.example.capstoneandroidapp.tflite.Classifier$Recognition
-com/example/capstoneandroidapp/databinding/ActivityPopupBinding.java
- com.example.capstoneandroidapp.databinding.ActivityPopupBinding
 com/example/capstoneandroidapp/databinding/ImageEditDialogBinding.java
  com.example.capstoneandroidapp.databinding.ImageEditDialogBinding
 com/example/capstoneandroidapp/databinding/FragmentSecondBinding.java
@@ -75,6 +74,7 @@ com/example/capstoneandroidapp/DetectorActivity.java
  com.example.capstoneandroidapp.DetectorActivity$4
  com.example.capstoneandroidapp.DetectorActivity$5
  com.example.capstoneandroidapp.DetectorActivity$6
+ com.example.capstoneandroidapp.DetectorActivity$6$1
  com.example.capstoneandroidapp.DetectorActivity$7
  com.example.capstoneandroidapp.DetectorActivity$DetectorMode
 com/example/capstoneandroidapp/MainActivity.java
@@ -107,8 +107,6 @@ com/example/capstoneandroidapp/MaskCameraActivity.java
  com.example.capstoneandroidapp.MaskCameraActivity$6
  com.example.capstoneandroidapp.MaskCameraActivity$7
  com.example.capstoneandroidapp.MaskCameraActivity$8
-com/example/capstoneandroidapp/PopupActivity.java
- com.example.capstoneandroidapp.PopupActivity
 com/example/capstoneandroidapp/customview/AutoFitTextureView.java
  com.example.capstoneandroidapp.customview.AutoFitTextureView
 com/example/capstoneandroidapp/customview/OverlayView.java

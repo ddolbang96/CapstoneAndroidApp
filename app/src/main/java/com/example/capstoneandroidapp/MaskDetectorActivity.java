@@ -16,6 +16,8 @@
 
 package com.example.capstoneandroidapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -32,8 +34,11 @@ import android.media.ImageReader.OnImageAvailableListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
+import android.view.Gravity;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -120,6 +125,15 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
   private Bitmap faceBmp = null;
 
   private int phase;
+  private int dialogFlag = 0;
+  private int countPhaseOneMaskOn = 0;
+  private int countPhaseOneMaskOff = 0;
+  private int countPhaseThreeMaskOn = 0;
+  private int countPhaseThreeMaskOff = 0;
+  private long start, end;
+  private double term;
+  private String dialogMessage = "";
+  private AlertDialog alertDialog;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -267,6 +281,26 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
                 .addOnSuccessListener(new OnSuccessListener<List<Face>>() {
                   @Override
                   public void onSuccess(List<Face> faces) {
+
+                    if(dialogFlag == 1){
+                      end = System.currentTimeMillis();
+                      term = term + (end - start);
+                      if(term >= 5000){
+                        alertDialog.cancel();
+                        dialogFlag = 0;
+                        term = 0;
+                        countPhaseOneMaskOn = 0;
+                        countPhaseOneMaskOff = 0;
+                        countPhaseThreeMaskOn = 0;
+                        countPhaseThreeMaskOff = 0;
+                      }
+                      else{
+                        start = System.currentTimeMillis();
+                        alertDialog.setMessage(dialogMessage + "\n\n" + (int)((5000 - term)/1000));
+                        alertDialog.show();
+                      }
+                    }
+
                     if (faces.size() == 0) { // 마스크 안 씀
                       updateResults(currTimestamp, new LinkedList<>());
                       return;
@@ -461,14 +495,45 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
               Classifier.Recognition result = resultsAux.get(0);
 
               float conf = result.getConfidence();
-              if (conf >= 0.6f) {
 
+              if (conf >= 0.6f) {
                 confidence = conf;
                 label = result.getTitle();
                 if (result.getId().equals("0")) {
                   color = Color.GREEN;
                   // 마스크 쓴 경우
                   if(phase == 1){
+                    if(countPhaseOneMaskOn == 5){ // count = 10이어야만 다이얼로그를 띄움
+                      if(dialogFlag == 0){
+                        start = System.currentTimeMillis();
+                        term = 0;
+                        dialogFlag = 1;
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MaskDetectorActivity.this);
+                        dialogMessage = "마스크를 벗어주세요.";
+                        builder.setTitle("공지").setMessage(dialogMessage + "\n\n" + (int)((5000 - term)/1000));
+                        builder.setPositiveButton("확인", new DialogInterface.OnClickListener(){
+                          @Override
+                          public void onClick(DialogInterface dialog, int id) {
+                            dialogFlag = 0;
+                            term = 0;
+                            countPhaseOneMaskOn = 0;
+                            countPhaseOneMaskOff = 0;
+                            countPhaseThreeMaskOn = 0;
+                            countPhaseThreeMaskOff = 0;
+                          }
+                        });
+                        alertDialog = builder.create();
+                        alertDialog.show();
+                        TextView messageView = (TextView)alertDialog.findViewById(android.R.id.message);
+                        messageView.setGravity(Gravity.CENTER);
+                      }
+                    }
+                    else{
+                      countPhaseOneMaskOn = countPhaseOneMaskOn + 1;
+                      countPhaseOneMaskOff = 0;
+                      //Log.v("test", "->" + countPhaseOneMaskOn);
+                    }
+                    /*
                     // 마스크 벗어달라고 팝업 띄우기 (PopupActivity 로 전환 + Phase 값 넘기기 -> MaskDetectorActivity 닫기)
                     Intent intent3 = new Intent(MaskDetectorActivity.this, PopupActivity.class);
                     intent3.putExtra("data", "마스크를 벗어주세요.");
@@ -476,8 +541,39 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
                     intent3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     //finish();
                     startActivity(intent3);
+                    */
                   }
                   else if(phase == 3){
+                    if(countPhaseThreeMaskOn == 5){
+                      if(dialogFlag == 0){
+                        start = System.currentTimeMillis();
+                        term = 0;
+                        dialogFlag = 1;
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MaskDetectorActivity.this);
+                        dialogMessage = "환영합니다!";
+                        builder.setTitle("공지").setMessage(dialogMessage + "\n\n" + (int)((5000 - term)/1000));
+                        builder.setPositiveButton("확인", new DialogInterface.OnClickListener(){
+                          @Override
+                          public void onClick(DialogInterface dialog, int id) {
+                            dialogFlag = 0;
+                            term = 0;
+                            countPhaseOneMaskOn = 0;
+                            countPhaseOneMaskOff = 0;
+                            countPhaseThreeMaskOn = 0;
+                            countPhaseThreeMaskOff = 0;
+                          }
+                        });
+                        alertDialog = builder.create();
+                        alertDialog.show();
+                        TextView messageView = (TextView)alertDialog.findViewById(android.R.id.message);
+                        messageView.setGravity(Gravity.CENTER);
+                      }
+                    }
+                    else{
+                      countPhaseThreeMaskOn = countPhaseThreeMaskOn + 1;
+                      countPhaseThreeMaskOff = 0;
+                    }
+                    /*
                     // 환영한다는 팝업 띄우기 (PopupActivity 로 전환 + Phase 값 넘기기 -> MaskDetectorActivity 닫기)
                     Intent intent4 = new Intent(MaskDetectorActivity.this, PopupActivity.class);
                     intent4.putExtra("data", "환영합니다.");
@@ -486,21 +582,63 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
                     intent4.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     //finish();
                     startActivity(intent4);
+                     */
                   }
                 }
                 else {
                   color = Color.RED;
                   // 마스크 안 쓴 경우
                     if(phase == 1){
-                      // DetectorActivity 로 전환 + Phase 값 (=2) 넘기기 -> MaskDetectorActivity 닫기
-                      Intent intent5 = new Intent(MaskDetectorActivity.this, DetectorActivity.class);
-                      phase = 2;
-                      intent5.putExtra("phase", phase);
-                      intent5.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                      //finish();
-                      startActivity(intent5);
+                      if(countPhaseOneMaskOff == 5){
+                        countPhaseOneMaskOn = 0;
+                        countPhaseOneMaskOff = 0;
+                        countPhaseThreeMaskOn = 0;
+                        countPhaseThreeMaskOff = 0;
+                        // DetectorActivity 로 전환 + Phase 값 (=2) 넘기기 -> MaskDetectorActivity 닫기
+                        Intent intent5 = new Intent(MaskDetectorActivity.this, DetectorActivity.class);
+                        phase = 2;
+                        intent5.putExtra("phase", phase);
+                        intent5.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        //finish();
+                        startActivity(intent5);
+                      }
+                      else{
+                        countPhaseOneMaskOff = countPhaseOneMaskOff + 1;
+                        countPhaseOneMaskOn = 0;
+                      }
+
                     }
                     else if(phase == 3){
+                      if(countPhaseThreeMaskOff == 5){
+                        if(dialogFlag == 0){
+                          start = System.currentTimeMillis();
+                          term = 0;
+                          dialogFlag = 1;
+                          AlertDialog.Builder builder = new AlertDialog.Builder(MaskDetectorActivity.this);
+                          dialogMessage = "마스크를 다시 써주세요.";
+                          builder.setTitle("공지").setMessage(dialogMessage + "\n\n" + (int)((5000 - term)/1000));
+                          builder.setPositiveButton("확인", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                              dialogFlag = 0;
+                              term = 0;
+                              countPhaseOneMaskOn = 0;
+                              countPhaseOneMaskOff = 0;
+                              countPhaseThreeMaskOn = 0;
+                              countPhaseThreeMaskOff = 0;
+                            }
+                          });
+                          alertDialog = builder.create();
+                          alertDialog.show();
+                          TextView messageView = (TextView)alertDialog.findViewById(android.R.id.message);
+                          messageView.setGravity(Gravity.CENTER);
+                        }
+                      }
+                      else{
+                        countPhaseThreeMaskOff = countPhaseThreeMaskOff + 1;
+                        countPhaseThreeMaskOn = 0;
+                      }
+                      /*
                       // 마스크 다시 써달라고 팝업 띄우기 (PopupActivity 로 전환 + Phase 값 넘기기 -> MaskDetectorActivity 닫기)
                       Intent intent6 = new Intent(MaskDetectorActivity.this, PopupActivity.class);
                       intent6.putExtra("data", "마스크를 다시 써주세요.");
@@ -508,6 +646,7 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
                       intent6.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                       //finish();
                       startActivity(intent6);
+                       */
                     }
 
                 }

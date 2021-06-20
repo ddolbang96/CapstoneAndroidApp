@@ -35,10 +35,6 @@
             android:label="@string/tfe_od_app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.ObjectDetection" />
-        <activity
-            android:name=".PopupActivity"
-            android:label="@string/title_activity_popup"
-            android:theme="@style/Theme.CapstoneAndroidApp.NoActionBar"></activity>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />
     </application>

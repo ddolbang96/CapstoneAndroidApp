@@ -2081,7 +2081,6 @@ id multiply
 id nav_controller_view_tag
 id nav_graph
 id nav_host_fragment_container
-id nav_host_fragment_content_popup
 id navigation_header_container
 id never
 id noScroll
@@ -2238,7 +2237,6 @@ id transition_transform
 id triangle
 id tv_id
 id tv_pass
-id txtText
 id unchecked
 id uniform
 id unlabeled
@@ -2320,9 +2318,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_login
 layout activity_main
-layout activity_popup
 layout activity_register
-layout content_popup
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog

@@ -36,6 +36,7 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -51,7 +52,6 @@ import com.google.mlkit.vision.face.FaceDetection;
 import com.google.mlkit.vision.face.FaceDetector;
 import com.google.mlkit.vision.face.FaceDetectorOptions;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -133,6 +133,13 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   private FloatingActionButton fabAdd;
 
   private int phase;
+  private int dialogFlag = 0;
+  private int countONDB = 0;
+  private int countOFFDB = 0;
+  private String dialogMessage = "";
+  private AlertDialog alertDialog;
+  private long start, end;
+  private double term;
 
   //private HashMap<String, Classifier.Recognition> knownFaces = new HashMap<>();
 
@@ -306,6 +313,30 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             .addOnSuccessListener(new OnSuccessListener<List<Face>>() {
               @Override
               public void onSuccess(List<Face> faces) {
+
+                if(dialogFlag == 1){
+                  end = System.currentTimeMillis();
+                  term = term + (end - start);
+                  if(term >= 5000){
+                    alertDialog.cancel();
+                    term = 0;
+                    countONDB = 0;
+                    countOFFDB = 0;
+                    // MaskDetectorActivity로 전환 + Phase 값 (=1) 넘기기 -> DetectorAcitivity 닫기
+                    Intent intent8 = new Intent(DetectorActivity.this, MaskDetectorActivity.class);
+                    phase = 1;
+                    intent8.putExtra("phase", phase);
+                    intent8.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    //finish();
+                    startActivity(intent8);
+                  }
+                  else{
+                    start = System.currentTimeMillis();
+                    alertDialog.setMessage(dialogMessage + "\n\n" + (int)((5000 - term)/1000));
+                    alertDialog.show();
+                  }
+                }
+
                 if (faces.size() == 0) {
                   updateResults(currTimestamp, new LinkedList<>());
                   return;
@@ -337,7 +368,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
   // Which detection model to use: by default uses Tensorflow Object Detection API frozen
   // checkpoints.
   private enum DetectorMode {
-    TF_OD_API;
+    TF_OD_API
   }
 
   @Override
@@ -570,17 +601,60 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                 if (result.getId().equals("0")) {
                   color = Color.GREEN;
                   phase = 3;
-                  // MaskDetectorActivity로 전환 + Phase 값 (=3) 넘기기 -> DetectorAcitivity 닫기
-                  Intent intent3 = new Intent(DetectorActivity.this, MaskDetectorActivity.class);
-                  intent3.putExtra("phase", phase);
-                  intent3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                  //finish();
-                  startActivity(intent3);
+                  if(countONDB == 3){
+                    countONDB = 0;
+                    // MaskDetectorActivity로 전환 + Phase 값 (=3) 넘기기 -> DetectorAcitivity 닫기
+                    Intent intent3 = new Intent(DetectorActivity.this, MaskDetectorActivity.class);
+                    intent3.putExtra("phase", phase);
+                    intent3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    //finish();
+                    startActivity(intent3);
+                  }
+                  else{
+                    countONDB = countONDB + 1;
+                    countOFFDB = 0;
+                  }
                 } else {
                   color = Color.RED;
                 }
               }
               else{ // DB에 일치하는 사람이 없는 경우
+                if(countOFFDB == 3){
+                  if(dialogFlag == 0){
+                    start = System.currentTimeMillis();
+                    term = 0;
+                    dialogFlag = 1;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(DetectorActivity.this);
+                    dialogMessage = "등록이 안 되어 있습니다.";
+                    builder.setTitle("공지").setMessage(dialogMessage + "\n\n" + (int)((5000 - term)/1000));
+                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener(){
+                      @Override
+                      public void onClick(DialogInterface dialog, int id) {
+                        dialogFlag = 0;
+                        term = 0;
+                        countONDB = 0;
+                        countOFFDB = 0;
+                        // MaskDetectorActivity로 전환 + Phase 값 (=1) 넘기기 -> DetectorAcitivity 닫기
+                        Intent intent7 = new Intent(DetectorActivity.this, MaskDetectorActivity.class);
+                        phase = 1;
+                        intent7.putExtra("phase", phase);
+                        intent7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        //finish();
+                        startActivity(intent7);
+                      }
+                    });
+                    alertDialog = builder.create();
+                    alertDialog.show();
+                    TextView messageView = (TextView)alertDialog.findViewById(android.R.id.message);
+                    messageView.setGravity(Gravity.CENTER);
+                  }
+                }
+                else{
+                  countOFFDB = countOFFDB + 1;
+                  countONDB = 0;
+                  //Log.v("test", "->" + countOFFDB);
+                }
+                /*
                 // "등록이 안 되어있다"는 팝업 띄우기 (PopupActivity 로 전환 + Phase 값 (=1) 넘기기 -> DetectorActivity 닫기
                 Intent intent2 = new Intent(DetectorActivity.this, PopupActivity.class);
                 intent2.putExtra("data", "등록이 안 되어 있습니다.");
@@ -589,6 +663,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                 intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 //finish();
                 startActivity(intent2);
+                 */
               }
             }
 

@@ -415,10 +415,10 @@ library {
   maven_library {
     groupId: "org.tensorflow"
     artifactId: "tensorflow-lite"
-    version: "0.0.0-nightly"
+    version: "2.3.0"
   }
   digests {
-    sha256: "=\302v\331)\236)\2047h\315\371X\333\346\276\341\310*\307\256\rX\341\212\362\277\024\202\252\316\204"
+    sha256: "K\006\360z\201\362\312\000\343\"#\276\325i<\367\301>\'\363J\215n\315\\Y\020\277C+\003\335"
   }
 }
 library {
@@ -465,10 +465,10 @@ library {
   maven_library {
     groupId: "com.android.volley"
     artifactId: "volley"
-    version: "1.1.1"
+    version: "1.2.0"
   }
   digests {
-    sha256: "\362\355\037M\317@\336T\211!\211d\264=\234\350~\\m\000\333\246\333\316\b\033\216\262v\214$\322"
+    sha256: "w\023\235CE\250\276b\241\312\r\214\273y\3532\315^m>\230Wi\225\371C\244\240\213\001~\301"
   }
 }
 library {

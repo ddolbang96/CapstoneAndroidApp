@@ -1,4 +1,4 @@
-#Sun Jun 20 19:35:13 KST 2021
+#Mon Jun 21 02:04:05 KST 2021
 base.0=C\:\\Users\\User\\StudioProjects\\CapstoneAndroidApp\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
