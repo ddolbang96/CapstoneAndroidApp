@@ -345,7 +345,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                     alertDialog.show();
                   }
                 }
-
+                onAddClick();
                 if (faces.size() == 0) {
                   updateResults(currTimestamp, new LinkedList<>());
                   return;
@@ -436,6 +436,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
   private void showAddFaceDialog(SimilarityClassifier.Recognition rec) {
 
+    detector.register("Elon Musk", rec);
+    return;
+    /*
     AlertDialog.Builder builder = new AlertDialog.Builder(this);
     LayoutInflater inflater = getLayoutInflater();
     View dialogLayout = inflater.inflate(R.layout.image_edit_dialog, null);
@@ -462,7 +465,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     });
     builder.setView(dialogLayout);
     builder.show();
-
+  */
   }
 
   private void updateResults(long currTimestamp, final List<SimilarityClassifier.Recognition> mappedRecognitions) {
@@ -471,7 +474,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     trackingOverlay.postInvalidate();
     computingDetection = false;
     //adding = false;
-
 
     if (mappedRecognitions.size() > 0) {
        LOGGER.i("Adding results");
@@ -598,10 +600,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
               SimilarityClassifier.Recognition result = resultsAux.get(0);
 
               extra = result.getExtra();
-  //          Object extra = result.getExtra();
-  //          if (extra != null) {
-  //            LOGGER.i("embeeding retrieved " + extra.toString());
-  //          }
+              //          Object extra = result.getExtra();
+              //          if (extra != null) {
+              //            LOGGER.i("embeeding retrieved " + extra.toString());
+              //          }
 
               float conf = result.getDistance();
               if (conf < 1.0f) { // DB에 일치하는 사람이 있는 경우
@@ -610,18 +612,18 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                 if (result.getId().equals("0")) {
                   color = Color.GREEN;
                   phase = 3;
-                  if(countONDB == 3){
+                  if (countONDB == 3) {
                     countONDB = 0;
                     progressValueOn = 0;
                     progressBar.setProgress(progressValueOn);
                     // MaskDetectorActivity로 전환 + Phase 값 (=3) 넘기기 -> DetectorAcitivity 닫기
                     Intent intent3 = new Intent(DetectorActivity.this, MaskDetectorActivity.class);
                     intent3.putExtra("phase", phase);
+                    intent3.putExtra("name", label);
                     intent3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     //finish();
                     startActivity(intent3);
-                  }
-                  else{
+                  } else {
                     countONDB = countONDB + 1;
                     progressValueOn = progressValueOn + 33;
                     progressValueOff = 0;
@@ -631,10 +633,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                 } else {
                   color = Color.RED;
                 }
-              }
-              else{ // DB에 일치하는 사람이 없는 경우
-                if(countOFFDB == 3){
-                  if(dialogFlag == 0){
+              } else { // DB에 일치하는 사람이 없는 경우
+                if (countOFFDB == 3) {
+                  if (dialogFlag == 0) {
                     start = System.currentTimeMillis();
                     term = 0;
                     dialogFlag = 1;
@@ -643,8 +644,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                     ContextThemeWrapper cw = new ContextThemeWrapper(DetectorActivity.this, R.style.AlertDialogTheme);
                     AlertDialog.Builder builder = new AlertDialog.Builder(cw);
                     dialogMessage = "죄송합니다.\n등록이 안 되어 있습니다.";
-                    builder.setTitle("공지").setMessage(dialogMessage + "\n\n" + (int)((5000 - term)/1000));
-                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener(){
+                    builder.setTitle("공지").setMessage(dialogMessage + "\n\n" + (int) ((5000 - term) / 1000));
+                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                       @Override
                       public void onClick(DialogInterface dialog, int id) {
                         dialogFlag = 0;
@@ -662,11 +663,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                     });
                     alertDialog = builder.create();
                     alertDialog.show();
-                    TextView messageView = (TextView)alertDialog.findViewById(android.R.id.message);
+                    TextView messageView = (TextView) alertDialog.findViewById(android.R.id.message);
                     messageView.setGravity(Gravity.CENTER);
                   }
-                }
-                else{
+                } else {
                   countOFFDB = countOFFDB + 1;
                   progressValueOff = progressValueOff + 33;
                   progressValueOn = 0;
@@ -694,14 +694,14 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
               Matrix flip = new Matrix();
               if (sensorOrientation == 90 || sensorOrientation == 270) {
                 flip.postScale(1, -1, previewWidth / 2.0f, previewHeight / 2.0f);
-              }
-              else {
+              } else {
                 flip.postScale(-1, 1, previewWidth / 2.0f, previewHeight / 2.0f);
               }
               //flip.postScale(1, -1, targetW / 2.0f, targetH / 2.0f);
               flip.mapRect(boundingBox);
 
             }
+
 
             final SimilarityClassifier.Recognition result = new SimilarityClassifier.Recognition(
                     "0", label, confidence, boundingBox);
@@ -711,7 +711,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             result.setExtra(extra);
             result.setCrop(crop);
             mappedRecognitions.add(result);
-
           }
         }
 

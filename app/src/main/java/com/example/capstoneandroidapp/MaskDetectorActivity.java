@@ -135,6 +135,7 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
   private long start, end;
   private double term;
   private String dialogMessage = "";
+  private String name;
   private AlertDialog alertDialog;
 
   private ProgressBar progressBar;
@@ -152,6 +153,7 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
 
     Intent intent = getIntent();
     phase = intent.getIntExtra("phase", 1);
+    name = intent.getStringExtra("name");
 
     // Real-time contour detection of multiple faces
     FaceDetectorOptions options =
@@ -300,6 +302,19 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
                         alertDialog.cancel();
                         dialogFlag = 0;
                         term = 0;
+                        if(phase == 3 && countPhaseThreeMaskOn == 5) {
+                          countPhaseOneMaskOn = 0;
+                          countPhaseOneMaskOff = 0;
+                          countPhaseThreeMaskOn = 0;
+                          countPhaseThreeMaskOff = 0;
+                          Intent intent9 = new Intent(MaskDetectorActivity.this, MaskDetectorActivity.class);
+                          phase = 1;
+                          intent9.putExtra("phase", phase);
+                          intent9.putExtra("name", ".");
+                          intent9.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                          //finish();
+                          startActivity(intent9);
+                        }
                         countPhaseOneMaskOn = 0;
                         countPhaseOneMaskOff = 0;
                         countPhaseThreeMaskOn = 0;
@@ -570,17 +585,25 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
                         progressBar.setProgress(progressValuePhaseThreeMaskOn);
                         ContextThemeWrapper cw = new ContextThemeWrapper(MaskDetectorActivity.this, R.style.AlertDialogTheme);
                         AlertDialog.Builder builder = new AlertDialog.Builder(cw);
-                        dialogMessage = "OOO님,\n환영합니다!";
+                        dialogMessage = name + "님,\n환영합니다!";
                         builder.setTitle("공지").setMessage(dialogMessage + "\n\n" + (int)((5000 - term)/1000));
                         builder.setPositiveButton("확인", new DialogInterface.OnClickListener(){
                           @Override
                           public void onClick(DialogInterface dialog, int id) {
+                            phase = 1;
                             dialogFlag = 0;
                             term = 0;
                             countPhaseOneMaskOn = 0;
                             countPhaseOneMaskOff = 0;
                             countPhaseThreeMaskOn = 0;
                             countPhaseThreeMaskOff = 0;
+                            Intent intent9 = new Intent(MaskDetectorActivity.this, MaskDetectorActivity.class);
+                            phase = 1;
+                            intent9.putExtra("phase", phase);
+                            intent9.putExtra("name", ".");
+                            intent9.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            //finish();
+                            startActivity(intent9);
                           }
                         });
                         alertDialog = builder.create();
@@ -646,7 +669,7 @@ public class MaskDetectorActivity extends MaskCameraActivity implements OnImageA
                           progressBar.setProgress(progressValuePhaseThreeMaskOff);
                           ContextThemeWrapper cw = new ContextThemeWrapper(MaskDetectorActivity.this, R.style.AlertDialogTheme);
                           AlertDialog.Builder builder = new AlertDialog.Builder(cw);
-                          dialogMessage = "OOO님,\n마스크를 다시 써주세요!";
+                          dialogMessage = name + "님,\n마스크를 다시 써주세요!";
                           builder.setTitle("공지").setMessage(dialogMessage + "\n\n" + (int)((5000 - term)/1000));
                           builder.setPositiveButton("확인", new DialogInterface.OnClickListener(){
                             @Override
